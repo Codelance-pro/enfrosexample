@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  scrollbar-width: thin;
+  scrollbar-color: hsl(45 93% 47%) hsl(0 0% 13%);
+  scroll-behavior: auto;
+}
+
+@layer base {
+ :root {
+  --background: 50 35% 90%;
+  --foreground: 0 0% 10%;
+
+  --primary: 45 95% 55%; /* GOLD */
+  --primary-foreground: 0 0% 5%;
+
+  --secondary: 50 30% 85%; /* Soft yellow */
+  --secondary-foreground: 0 0% 10%;
+
+  --accent: 144 45% 40%; /* Green from logo */
+  --muted-foreground: 0 0% 40%;
+
+  --card: 0 0% 100%;
+}
+
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 45 93% 52%;
+    --primary-foreground: 0 0% 8%;
+    --primary-glow: 45 93% 65%;
+
+    --secondary: 210 16% 72%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 0 0% 16%;
+    --muted-foreground: 210 16% 72%;
+
+    --accent: 158 64% 55%;
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 23%;
+    --input: 0 0% 23%;
+    --ring: 45 93% 52%;
+
+    --shadow-glow: 0 10px 40px -10px hsl(45 93% 52% / 0.4);
+    --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.6);
+    --shadow-card: 0 8px 30px -5px hsl(0 0% 0% / 0.7);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-color: hsl(0 0% 10%);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(0 0% 13%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(45 93% 47%);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(45 93% 52%);
+  }
+}
+
+@layer utilities {
+  .bg-black-80 {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .bg-luxury-black {
+    background: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 12%) 100%);
+  }
+  
+  .bg-luxury-card {
+    background: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 15%) 100%);
+  }
+  
+  .border-luxury {
+    border: 1px solid hsl(45 93% 47% / 0.2);
+  }
+  
+  .text-gold {
+    color: hsl(45 93% 47%);
+  }
+  
+  .text-silver {
+    color: hsl(210 16% 76%);
+  }
+  
+  .shadow-luxury {
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.8);
+  }
+  
+  .glow {
+    box-shadow: 0 0 30px hsl(45 93% 47% / 0.2);
+  }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 hsl(45 93% 47% / 0.1); }
+  50% { box-shadow: 0 0 30px hsl(45 93% 47% / 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.animate-fade-in { animation: fade-in 1.2s ease forwards; }
+.animate-fade-in-up { animation: fade-in-up 1.2s ease forwards; }
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.2s infinite ease-in-out; }
+.animate-shimmer {
+  animation: shimmer 3s infinite linear;
+  background: linear-gradient(90deg, 
+    hsl(0 0% 12%) 0%, 
+    hsl(0 0% 15%) 50%, 
+    hsl(0 0% 12%) 100%);
+  background-size: 1000px 100%;
+}
