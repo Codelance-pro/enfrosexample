@@ -9,7 +9,7 @@ import solar2 from "../assets/Agriculture & Farming Solar Solutions.jpg"
 import solar3 from "../assets/Warehouse & Industrial Rooftop Solar.jpg"
 import solar4 from "../assets/Villas & Residential Solar Systems.jpg"
 import solar5 from "../assets/Manufacturing Unit Solar Installations.jpg"
-import solar6 from "../assets/solar6.JPG"
+import solar6 from "../assets/solar6.jpg"
 import solar7 from "../assets/Landscape & Open-Area Solar Projects.jpg";
 // import solar8 from "@/assets/solar8.JPG";
 // import solar9 from "@/assets/solar9.JPG";
