@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Package,
   Zap,
@@ -121,8 +122,20 @@ const useScrollAnimation = () => {
 };
 
 const Products: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('Earthing Products');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'Earthing & Lighting protecting solution';
+  const initialSearch = searchParams.get('product') || '';
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
+
+  // Update states when search params change
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    const prod = searchParams.get('product');
+    if (cat) setSelectedCategory(cat);
+    if (prod) setSearchQuery(prod);
+  }, [searchParams]);
 
   // Stats & Refs
   const headerAnim = useScrollAnimation();
@@ -137,65 +150,60 @@ const Products: React.FC = () => {
   const categories: ProductCategory[] = [
     {
       id: 1,
-      name: 'Earthing Products',
+      name: 'Earthing & Lighting protecting solution',
       description: 'Grounding and safety equipment',
       icon: <Shield className="w-8 h-8" />,
       color: 'from-green-500 to-emerald-500',
       count: 14
     },
-
     {
       id: 2,
-      name: 'Fencing Products',
+      name: 'Fencing & boundary solution',
       description: 'Security and perimeter protection',
       icon: <Shield className="w-8 h-8" />,
       color: 'from-slate-500 to-slate-700',
-      count: 8
+      count: 12
     },
-
-    // {
-    //   id: 3,
-    //   name: 'Solar Panels',
-    //   description: 'High-efficiency photovoltaic panels',
-    //   icon: <Sun className="w-8 h-8" />,
-    //   color: 'from-orange-500 to-yellow-500',
-    //   count: 42
-    // },
-
-    // {
-    //   id: 4,
-    //   name: 'Inverters',
-    //   description: 'Power conversion systems',
-    //   icon: <Zap className="w-8 h-8" />,
-    //   color: 'from-blue-500 to-purple-500',
-    //   count: 28
-    // },
-    // {
-    //   id: 5,
-    //   name: 'Mounting Structures',
-    //   description: 'Installation frameworks',
-    //   icon: <Grid className="w-8 h-8" />,
-    //   color: 'from-gray-600 to-gray-700',
-    //   count: 35
-    // },
-    // {
-    //   id: 6,
-    //   name: 'Cables & Accessories',
-    //   description: 'Wiring and connectors',
-    //   icon: <Cable className="w-8 h-8" />,
-    //   color: 'from-red-500 to-pink-500',
-    //   count: 56
-    // },
-
-    // {
-    //   id: 7,
-    //   name: 'Other Components',
-    //   description: 'Additional solar equipment',
-    //   icon: <BatteryCharging className="w-8 h-8" />,
-    //   color: 'from-cyan-500 to-blue-500',
-    //   count: 18
-    // },
-
+    {
+      id: 3,
+      name: 'Cable management system',
+      description: 'Organized cable routing',
+      icon: <Cable className="w-8 h-8" />,
+      color: 'from-blue-500 to-purple-500',
+      count: 1
+    },
+    {
+      id: 4,
+      name: 'Street Lights & Lighting Solution',
+      description: 'Efficient illumination',
+      icon: <Sun className="w-8 h-8" />,
+      color: 'from-orange-500 to-yellow-500',
+      count: 0
+    },
+    {
+      id: 5,
+      name: 'Dwc Pipes & Its accessories',
+      description: 'Drainage and cable protection',
+      icon: <Grid className="w-8 h-8" />,
+      color: 'from-gray-600 to-gray-700',
+      count: 0
+    },
+    {
+      id: 6,
+      name: 'Precast Boundary Wall',
+      description: 'Prefabricated boundary walls',
+      icon: <Grid className="w-8 h-8" />,
+      color: 'from-red-500 to-pink-500',
+      count: 0
+    },
+    {
+      id: 7,
+      name: 'Fire safety System',
+      description: 'Emergency fire prevention',
+      icon: <Shield className="w-8 h-8" />,
+      color: 'from-cyan-500 to-blue-500',
+      count: 0
+    },
   ];
 
   // Sample products data
@@ -376,7 +384,7 @@ const Products: React.FC = () => {
     {
       id: 9,
       name: 'Conventional Lightning Arrester',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Conventional Lightning Arresters provide dependable protection against lightning strikes by directing electrical discharge safely to the grounding system.',
       features: [
         'Solar Plant Protection',
@@ -399,7 +407,7 @@ const Products: React.FC = () => {
     {
       id: 10,
       name: 'ESE Lightning Arrester',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'ESE Lightning Arrester protects solar power plants from lightning strikes by capturing the lightning discharge and safely transferring the energy to the ground.',
       features: [
         'Solar Ground Mounted Power Plants',
@@ -422,7 +430,7 @@ const Products: React.FC = () => {
     {
       id: 11,
       name: 'Copper Bonded Earthing Rod',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Copper Bonded Earthing Rods provide strong and reliable grounding for solar installations with excellent conductivity and corrosion resistance.',
       features: [
         'Solar Module Structure ',
@@ -445,7 +453,7 @@ const Products: React.FC = () => {
     {
       id: 12,
       name: 'Pure Copper Strip',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Copper Strips provide high electrical conductivity and are widely used in solar grounding and lightning protection systems.',
       features: [
         'Inverter Earthing',
@@ -468,7 +476,7 @@ const Products: React.FC = () => {
     {
       id: 13,
       name: 'Advanced Earthing Compound',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Earthing Compound improves soil conductivity and reduces earth resistance for effective grounding performance.',
       features: [
         'Solar Plant Earthing Systems',
@@ -491,7 +499,7 @@ const Products: React.FC = () => {
     {
       id: 14,
       name: 'RCC Earthing Chamber',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Earthing Chambers are designed to protect earthing electrodes and allow easy inspection and maintenance.',
       features: [
         'Solar Plant Earthing Points',
@@ -514,7 +522,7 @@ const Products: React.FC = () => {
     {
       id: 15,
       name: 'Hot Dip GI Earthing Strip',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Hot Dip Galvanized Earthing Strips are used for effective grounding connections in solar plants and ensure safe discharge of fault currents.',
       features: [
         'Solar Structure Earthing',
@@ -537,7 +545,7 @@ const Products: React.FC = () => {
     {
       id: 16,
       name: 'Perforated Cable Tray',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'High-quality perforated cable trays for organized and safe routing of solar and earthing cables.',
       features: [
         'High Load Capacity',
@@ -561,7 +569,7 @@ const Products: React.FC = () => {
     {
       id: 17,
       name: 'Chemical Earthing Electrode',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Advanced chemical electrode with internal crystalline filling for ultra-low resistance earthing.',
       features: [
         'Pipe-in-Pipe Design',
@@ -585,7 +593,7 @@ const Products: React.FC = () => {
     {
       id: 18,
       name: 'Maintenance-Free Copper Rod',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Specialized copper rod designed for maintenance-free earthing in high resistivity soils.',
       features: [
         'Solid Core',
@@ -609,7 +617,7 @@ const Products: React.FC = () => {
     {
       id: 19,
       name: 'Industrial Pit Cover',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Cast iron pit covers for heavy industrial areas providing easy access to earthing nodes.',
       features: [
         'Cast Iron',
@@ -633,7 +641,7 @@ const Products: React.FC = () => {
     {
       id: 20,
       name: 'Complete Earthing Kit',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'All-in-one commercial earthing kit including electrode, compound, and chamber for quick installation.',
       features: [
         'Ready to Install',
@@ -657,7 +665,7 @@ const Products: React.FC = () => {
     {
       id: 21,
       name: 'Integrated Lightning System',
-      category: 'Earthing Products',
+      category: 'Earthing & Lighting protecting solution',
       description: 'Complete integrated lightning protection system for tall structures and high-value installations.',
       features: [
         'Total Protection',
@@ -681,7 +689,7 @@ const Products: React.FC = () => {
     {
       id: 22,
       name: 'High-Tensile Barbed Wire',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Barbed Wire is a cost-effective security fencing material with sharp barbs spaced along the wire to prevent unauthorized entry. We supply high-quality barbed wire suitable for various perimeter protection applications.',
       features: [
         'Agricultural fencing',
@@ -705,7 +713,7 @@ const Products: React.FC = () => {
     {
       id: 23,
       name: 'Concertina Coil Fence',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Concertina Coil is a high-security fencing solution made with razor-sharp blades formed into coils, designed to act as a strong deterrent against intrusion. We supply concertina coils for high-security perimeter protection.',
       features: [
         ' Solar power plant security',
@@ -729,7 +737,7 @@ const Products: React.FC = () => {
     {
       id: 24,
       name: 'GI Chain Link Fence',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'GI Chain Link Fence is a durable fencing solution made from galvanized steel wire, designed to provide strong and long-lasting perimeter protection. We supply high-quality chain link fencing suitable for various industrial and infrastructure applications.',
       features: [
         'Solar power plant perimeter fencing',
@@ -753,7 +761,7 @@ const Products: React.FC = () => {
     {
       id: 25,
       name: 'PVC Coated Chain Link',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'PVC Chain Link Fence consists of galvanized steel wire coated with protective PVC, offering enhanced resistance against rust, weather, and corrosion. We supply reliable fencing solutions suitable for outdoor installations.',
       features: [
         'Solar farm fencing',
@@ -777,7 +785,7 @@ const Products: React.FC = () => {
     {
       id: 26,
       name: 'Professional Razor Panel',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Razor Panels are high-security fencing panels integrated with razor wire to provide enhanced perimeter protection. We supply durable razor panels suitable for sensitive and restricted areas.',
       features: [
         'Power plants and solar farms',
@@ -801,7 +809,7 @@ const Products: React.FC = () => {
     {
       id: 27,
       name: 'High-Tension Core Wires',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Tension Wires are strong galvanized wires used to support and tighten chain link fencing systems, ensuring stability and proper alignment of the fence structure.',
       features: [
         'Chain link fence installation',
@@ -825,7 +833,7 @@ const Products: React.FC = () => {
     {
       id: 28,
       name: 'Rigid Wire Mesh Fence',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Wire Mesh is a versatile fencing and screening material made from interwoven steel wires forming a strong grid structure. We supply quality wire mesh suitable for various industrial and construction applications.',
       features: [
         'Construction and infrastructure projects',
@@ -849,7 +857,7 @@ const Products: React.FC = () => {
     {
       id: 29,
       name: 'Solar Fence Energizer Guard',
-      category: 'Fencing Products',
+      category: 'Fencing & boundary solution',
       description: 'Specialized protective housing for solar fence energizers, providing weather protection and security.',
       features: [
         'Weather Resistant',

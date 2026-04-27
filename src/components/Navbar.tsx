@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import {
-  Menu, X, ChevronDown, LogOut, User, Settings, FileText,
+  Menu, X, ChevronDown, ChevronRight, LogOut, User, Settings, FileText,
   Home, Info, Package, Folder, Phone, BookOpen,
-  Calculator
+  Calculator, Zap, Shield, Grid, Lightbulb, Droplets, Layout, Flame, Cable
 } from "lucide-react";
 import logo2 from "../assets/enfros-logo.png";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,11 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+  const [mobileExpandedCategory, setMobileExpandedCategory] = useState<string | null>(null);
   const [user, setUser] = useState<UserData>({ role: "guest" });
 
   const navigate = useNavigate();
@@ -39,7 +43,9 @@ const Navbar = () => {
     setIsOpen(false);
     setIsAdminDropdownOpen(false);
     setIsServicesDropdownOpen(false);
+    setIsProductsDropdownOpen(false);
     setIsMobileServicesOpen(false);
+    setIsMobileProductsOpen(false);
   };
 
   const handleAdminLogin = () => goToPage("/admin/login");
@@ -55,11 +61,33 @@ const Navbar = () => {
   const menuItems = [
     { name: "Home", path: "/", icon: <Home className="w-5 h-5" /> },
     { name: "About", path: "/about", icon: <Info className="w-5 h-5" /> },
-    { name: "Services", path: "/services", icon: <Phone className="w-5 h-5" />, hasDropdown: true },
+    { name: "Services", path: "/services", icon: <Phone className="w-5 h-5" />, hasDropdown: true, dropdownType: 'services' },
     { name: "Projects", path: "/projects", icon: <Folder className="w-5 h-5" /> },
-    { name: "Products", path: "/products", icon: <Package className="w-5 h-5" /> },
+    { name: "Products", path: "/products", icon: <Package className="w-5 h-5" />, hasDropdown: true, dropdownType: 'products' },
     { name: "Careers", path: "/career", icon: <FileText className="w-5 h-5" /> },
     { name: "Contact", path: "/contact", icon: <Phone className="w-5 h-5" /> },
+  ];
+
+  const productCategories = [
+    {
+      name: "Earthing & Lighting protecting solution",
+      icon: <Shield className="w-5 h-5" />,
+      subheadings: [
+        "ESE Lightning Arrester",
+        "Copper Bonded Earthing Rod",
+        "Hot Dip GI Earthing Strip",
+        "Copper Strip",
+        "Conventional Lightning Arrester",
+        "Earthing Chamber (RCC & GI Cast Iron)",
+        "Earthing Compound"
+      ]
+    },
+    { name: "Fencing & boundary solution", icon: <Grid className="w-5 h-5" />, subheadings: [] },
+    { name: "Cable management system", icon: <Zap className="w-5 h-5" />, subheadings: [] },
+    { name: "Street Lights & Lighting Solution", icon: <Lightbulb className="w-5 h-5" />, subheadings: [] },
+    { name: "Dwc Pipes & Its accessories", icon: <Droplets className="w-5 h-5" />, subheadings: [] },
+    { name: "Precast Boundary Wall", icon: <Layout className="w-5 h-5" />, subheadings: [] },
+    { name: "Fire safety System", icon: <Flame className="w-5 h-5" />, subheadings: [] },
   ];
 
   return (
@@ -89,12 +117,18 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center  gap-1 space-x-5  ">
               {menuItems.map((item) => {
                 if (item.hasDropdown) {
+                  const isOpen = item.dropdownType === 'services' ? isServicesDropdownOpen : isProductsDropdownOpen;
+                  const setOpen = item.dropdownType === 'services' ? setIsServicesDropdownOpen : setIsProductsDropdownOpen;
+
                   return (
                     <div
                       key={item.name}
                       className="relative"
-                      onMouseEnter={() => setIsServicesDropdownOpen(true)}
-                      onMouseLeave={() => setIsServicesDropdownOpen(false)}
+                      onMouseEnter={() => setOpen(true)}
+                      onMouseLeave={() => {
+                        setOpen(false);
+                        if (item.dropdownType === 'products') setHoveredCategory(null);
+                      }}
                     >
                       <button
                         onClick={() => goToPage(item.path)}
@@ -102,37 +136,98 @@ const Navbar = () => {
                       >
                         {item.name}
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-180 text-yellow-500" : ""
+                          className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-yellow-500" : ""
                             }`}
                         />
                         <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-yellow-400 transition-all duration-300 group-hover:w-full" />
                       </button>
 
-                      
-                      {isServicesDropdownOpen && (
-                        <div className="absolute top-full left-0 mt-1 w-58 min-w-[220px] bg-white border border-gray-100 rounded-2xl shadow-2xl py-2 z-[60]">
-                          <button
-                            onClick={() => goToPage("/services")}
-                            className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
-                          >
-                            <Phone className="w-4 h-4 text-yellow-500" />
-                            <span className="font-medium">All Services</span>
-                          </button>
-                          <div className="h-px bg-gray-100 mx-4 my-1" />
-                          <button
-                            onClick={() => goToPage("/calculator")}
-                            className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
-                          >
-                            <Calculator className="w-4 h-4 text-yellow-500" />
-                            <span className="font-medium">Solar Calculator</span>
-                          </button>
-                          <button
-                            onClick={() => goToPage("/blog")}
-                            className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
-                          >
-                            <BookOpen className="w-4 h-4 text-yellow-500" />
-                            <span className="font-medium">Blog &amp; Insights</span>
-                          </button>
+                      {/* Generic Dropdown Container */}
+                      {isOpen && (
+                        <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-100 rounded-2xl shadow-2xl py-2 z-[60] animate-in fade-in slide-in-from-top-2 duration-200 ${item.dropdownType === 'products' ? 'w-[600px] flex' : 'w-58 min-w-[220px]'
+                          }`}>
+                          {item.dropdownType === 'services' ? (
+                            <>
+                              <button
+                                onClick={() => goToPage("/services")}
+                                className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
+                              >
+                                <Phone className="w-4 h-4 text-yellow-500" />
+                                <span className="font-medium">All Services</span>
+                              </button>
+                              <div className="h-px bg-gray-100 mx-4 my-1" />
+                              <button
+                                onClick={() => goToPage("/calculator")}
+                                className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
+                              >
+                                <Calculator className="w-4 h-4 text-yellow-500" />
+                                <span className="font-medium">Solar Calculator</span>
+                              </button>
+                              <button
+                                onClick={() => goToPage("/blog")}
+                                className="w-full flex items-center gap-3 px-5 py-3 text-sm text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 transition-colors"
+                              >
+                                <BookOpen className="w-4 h-4 text-yellow-500" />
+                                <span className="font-medium">Blog &amp; Insights</span>
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              {/* Products Mega Menu */}
+                              <div className="w-1/2 border-r border-gray-50 max-h-[400px] overflow-y-auto">
+                                {productCategories.map((cat) => (
+                                  <div
+                                    key={cat.name}
+                                    onMouseEnter={() => setHoveredCategory(cat.name)}
+                                    onClick={() => goToPage(`/products?category=${encodeURIComponent(cat.name)}`)}
+                                    className={`group flex items-center justify-between px-4 py-3 cursor-pointer transition-colors ${hoveredCategory === cat.name ? 'bg-yellow-50 text-yellow-700' : 'text-gray-700 hover:bg-gray-50'
+                                      }`}
+                                  >
+                                    <div className="flex items-center gap-3">
+                                      <span className={`${hoveredCategory === cat.name ? 'text-yellow-600' : 'text-gray-400 group-hover:text-yellow-500'}`}>
+                                        {cat.icon}
+                                      </span>
+                                      <span className="text-sm font-medium">{cat.name}</span>
+                                    </div>
+                                    {cat.subheadings.length > 0 && (
+                                      <ChevronRight className={`w-4 h-4 ${hoveredCategory === cat.name ? 'translate-x-1' : 'opacity-0'} transition-all`} />
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="w-1/2 bg-gray-50/50 p-4 min-h-[300px]">
+                                {hoveredCategory ? (
+                                  <div className="animate-in fade-in slide-in-from-left-2 duration-300">
+                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 px-2">
+                                      {hoveredCategory} Sub-products
+                                    </h3>
+                                    <div className="grid gap-1">
+                                      {productCategories.find(c => c.name === hoveredCategory)?.subheadings.length ? (
+                                        productCategories.find(c => c.name === hoveredCategory)?.subheadings.map((sub) => (
+                                          <button
+                                            key={sub}
+                                            onClick={() => goToPage(`/products?category=${encodeURIComponent(hoveredCategory)}&product=${encodeURIComponent(sub)}`)}
+                                            className="text-left px-3 py-2 text-sm text-gray-600 hover:text-yellow-700 hover:bg-white rounded-lg transition-all"
+                                          >
+                                            {sub}
+                                          </button>
+                                        ))
+                                      ) : (
+                                        <div className="px-2 py-4 text-sm text-gray-400 italic">
+                                          Explore our full range of {hoveredCategory}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="flex flex-col items-center justify-center h-full text-center p-6 text-gray-400">
+                                    <Package className="w-10 h-10 mb-2 opacity-20" />
+                                    <p className="text-sm">Hover over a category to see products</p>
+                                  </div>
+                                )}
+                              </div>
+                            </>
+                          )}
                         </div>
                       )}
                     </div>
@@ -233,10 +328,13 @@ const Navbar = () => {
             {/* Nav Items */}
             {menuItems.map((item) => {
               if (item.hasDropdown) {
+                const isDropdownOpen = item.dropdownType === 'services' ? isMobileServicesOpen : isMobileProductsOpen;
+                const setDropdownOpen = item.dropdownType === 'services' ? setIsMobileServicesOpen : setIsMobileProductsOpen;
+
                 return (
                   <div key={item.name}>
                     <button
-                      onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                      onClick={() => setDropdownOpen(!isDropdownOpen)}
                       className="w-full flex items-center justify-between px-4 py-4 rounded-xl text-white hover:bg-white/5 transition-colors"
                     >
                       <div className="flex items-center gap-3">
@@ -244,34 +342,70 @@ const Navbar = () => {
                         <span className="text-base font-semibold">{item.name}</span>
                       </div>
                       <ChevronDown
-                        className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180" : ""
+                        className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""
                           }`}
                       />
                     </button>
 
-                    {isMobileServicesOpen && (
-                      <div className="ml-4 pl-4 border-l border-gray-700 mb-1 flex flex-col gap-1">
-                        <button
-                          onClick={() => goToPage("/services")}
-                          className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
-                        >
-                          <Phone className="w-5 h-5 text-yellow-500" />
-                          <span>All Services</span>
-                        </button>
-                        <button
-                          onClick={() => goToPage("/calculator")}
-                          className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
-                        >
-                          <Calculator className="w-5 h-5 text-yellow-500" />
-                          <span>Solar Calculator</span>
-                        </button>
-                        <button
-                          onClick={() => goToPage("/blog")}
-                          className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
-                        >
-                          <BookOpen className="w-5 h-5 text-yellow-500" />
-                          <span>Blog &amp; Insights</span>
-                        </button>
+                    {isDropdownOpen && (
+                      <div className="ml-4 pl-4 border-l border-gray-800 mb-1 flex flex-col gap-1 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
+                        {item.dropdownType === 'services' ? (
+                          <>
+                            <button
+                              onClick={() => goToPage("/services")}
+                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                            >
+                              <Phone className="w-5 h-5 text-yellow-500" />
+                              <span>All Services</span>
+                            </button>
+                            <button
+                              onClick={() => goToPage("/calculator")}
+                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                            >
+                              <Calculator className="w-5 h-5 text-yellow-500" />
+                              <span>Solar Calculator</span>
+                            </button>
+                            <button
+                              onClick={() => goToPage("/blog")}
+                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                            >
+                              <BookOpen className="w-5 h-5 text-yellow-500" />
+                              <span>Blog &amp; Insights</span>
+                            </button>
+                          </>
+                        ) : (
+                          <div className="flex flex-col gap-1 py-1">
+                            {productCategories.map((cat) => (
+                              <div key={cat.name}>
+                                <button
+                                  onClick={() => cat.subheadings.length > 0 ? setMobileExpandedCategory(mobileExpandedCategory === cat.name ? null : cat.name) : goToPage(`/products?category=${encodeURIComponent(cat.name)}`)}
+                                  className="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <span className="text-yellow-600/70">{cat.icon}</span>
+                                    <span className="text-sm font-medium">{cat.name}</span>
+                                  </div>
+                                  {cat.subheadings.length > 0 && (
+                                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileExpandedCategory === cat.name ? 'rotate-180' : ''}`} />
+                                  )}
+                                </button>
+                                {mobileExpandedCategory === cat.name && (
+                                  <div className="ml-8 pl-4 border-l border-gray-800 flex flex-col gap-1 my-1 animate-in slide-in-from-left-1 duration-200">
+                                    {cat.subheadings.map(sub => (
+                                      <button
+                                        key={sub}
+                                        onClick={() => goToPage(`/products?category=${encodeURIComponent(cat.name)}&product=${encodeURIComponent(sub)}`)}
+                                        className="text-left px-4 py-2 text-sm text-gray-400 hover:text-yellow-400 transition-colors"
+                                      >
+                                        {sub}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
