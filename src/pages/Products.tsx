@@ -146,6 +146,21 @@ const Products: React.FC = () => {
   const servicesAnim = useScrollAnimation();
   const ctaAnim = useScrollAnimation();
 
+  // Hero background images carousel
+  const heroBgImages = [
+    'https://images.unsplash.com/photo-1594818379496-da1e345b0ded?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80'
+  ];
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % heroBgImages.length);
+    }, 3000); // changes every 3 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   // Product categories
   const categories: ProductCategory[] = [
     {
@@ -970,21 +985,45 @@ const Products: React.FC = () => {
         <div className="fixed bottom-20 left-20 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '1s' }}></div>
         <div className="fixed top-1/2 left-1/2 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }}></div>
 
-        {/* Header Section */}
-        <div
-          ref={headerAnim.ref}
-          className={`text-center mb-16 ${headerAnim.isVisible ? 'animate-on-scroll' : 'opacity-0'}`}
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            Solar <span className="bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">Products</span>
-          </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            High-quality solar components and professional services for your renewable energy needs
-          </p>
+        {/* Header Hero Section */}
+        <div className="relative -mt-2 mb-16 h-[400px] flex items-center justify-center overflow-hidden w-[100vw] ml-[calc(-50vw+50%)]">
+          {/* Scrollable Background Image wrapper */}
+          {heroBgImages.map((img, index) => (
+            <div 
+              key={index}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+                index === currentHeroIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ 
+                backgroundImage: `url("${img}")`,
+                backgroundAttachment: 'fixed', // This makes the image scrollable/parallax
+                filter: 'brightness(0.3)'
+              }}
+            />
+          ))}
+          
+          <div className="relative z-10 text-center px-4" ref={headerAnim.ref}>
+            <div className={`transition-all duration-1000 ${headerAnim.isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                {selectedCategory !== 'all' ? selectedCategory : 'Our Products'}
+              </h1>
+              <div className="flex items-center justify-center gap-2 text-sm md:text-base text-gray-300">
+                <span>Home</span>
+                <ChevronRight className="w-4 h-4" />
+                <span>Products</span>
+                {selectedCategory !== 'all' && (
+                  <>
+                    <ChevronRight className="w-4 h-4" />
+                    <span className="text-yellow-400">{selectedCategory}</span>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Search and Filter Section */}
-        <div
+        {/* <div
           ref={searchAnim.ref}
           className={`mb-12 ${searchAnim.isVisible ? 'animate-scale-in' : 'opacity-0'}`}
         >
@@ -1004,10 +1043,10 @@ const Products: React.FC = () => {
               Advanced Filters
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Categories Section */}
-        <section ref={categoriesAnim.ref} className="mb-20">
+        {/* <section ref={categoriesAnim.ref} className="mb-20">
           <div className={`flex items-center justify-between mb-8 ${categoriesAnim.isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div>
               <h2 className="text-3xl font-bold text-gray-900">Product Categories</h2>
@@ -1057,7 +1096,7 @@ const Products: React.FC = () => {
               </button>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Products Grid Section */}
         <section ref={productsAnim.ref} className="mb-20">
@@ -1070,7 +1109,7 @@ const Products: React.FC = () => {
                 {filteredProducts.length} products found
               </p>
             </div>
-            <div className="flex items-center space-x-4">
+            {/* <div className="flex items-center space-x-4">
               <span className="text-gray-700">Sort by:</span>
               <select className="bg-white border border-gray-200 text-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-500 shadow-sm">
                 <option>Featured</option>
@@ -1079,7 +1118,7 @@ const Products: React.FC = () => {
                 <option>Rating</option>
                 <option>Newest</option>
               </select>
-            </div>
+            </div> */}
           </div>
 
           {filteredProducts.length === 0 ? (
@@ -1098,89 +1137,91 @@ const Products: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="flex flex-col gap-12">
               {filteredProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className={`group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-yellow-200/50 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'
-                    }`}
+                  className={`group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'}`}
                 >
-                  {/* Product Image */}
-                  <div className="relative h-64 bg-gray-50 overflow-hidden flex items-center justify-center">
+                  {/* Left Side: Product Image & Badges */}
+                  <div className="md:w-[40%] lg:w-[35%] bg-gray-50/50 flex flex-col items-center justify-center p-8 relative border-b md:border-b-0 md:border-r border-gray-100">
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="w-full h-full group-hover:scale-110 transition-transform duration-500"
+                      className="max-h-[300px] object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                     {product.isFeatured && (
-                      <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm z-10">
-                        FEATURED
+                      <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] uppercase font-bold px-3 py-1 rounded shadow-sm z-10">
+                        Featured
                       </div>
                     )}
                     {product.discount && (
-                      <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full shadow-sm z-10">
-                        -{product.discount}%
+                      <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-[10px] uppercase font-bold px-3 py-1 rounded shadow-sm z-10">
+                        -{product.discount}% OFF
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/10 via-transparent to-transparent"></div>
                   </div>
 
-                  {/* Product Info */}
-                  <div className="p-6 flex flex-col flex-1">
-                    {/* Category Badge & Rating */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded bg-yellow-50 text-yellow-700 border border-yellow-100">
+                  {/* Right Side: Product Details */}
+                  <div className="md:w-[60%] lg:w-[65%] p-8 lg:p-10 flex flex-col">
+                    {/* Header: Category & Rating */}
+                    <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                      <span className="text-[11px] uppercase tracking-wider font-bold text-yellow-600">
                         {product.category}
                       </span>
-                      <div className="flex items-center">
-                        <Star className="w-3.5 h-3.5 text-yellow-400 fill-current" />
-                        <span className="text-gray-900 ml-1 text-sm font-bold">{product.rating}</span>
-                      </div>
+                      {product.rating > 0 && (
+                        <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md">
+                          <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                          <span className="text-gray-900 text-sm font-bold">{product.rating}</span>
+                          <span className="text-gray-400 text-xs ml-1">({product.reviews})</span>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Product Name */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-yellow-600 transition-colors duration-300 line-clamp-2 h-14">
+                    {/* Title & Description */}
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-yellow-600 transition-colors duration-300">
                       {product.name}
                     </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3 h-[4.5rem] leading-relaxed">
+                    <p className="text-gray-600 text-base leading-relaxed mb-8">
                       {product.description}
                     </p>
 
+                    {/* Specifications Grid */}
+                    {product.specifications && product.specifications.length > 0 && (
+                      <div className="grid grid-cols-2 gap-4 mb-8">
+                        {product.specifications.slice(0, 4).map((spec, idx) => (
+                          <div key={idx} className="bg-gray-50/80 rounded-lg p-3 border border-gray-100">
+                            <div className="text-[11px] uppercase tracking-wide text-gray-500 mb-1">{spec.key}</div>
+                            <div className="text-gray-900 font-semibold text-sm">{spec.value}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Features List */}
-                    <div className="mb-6 space-y-2 flex-grow">
-                      {product.features.slice(0, 4).map((feature, index) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 flex-grow">
+                      {product.features.map((feature, index) => (
                         <div key={index} className="flex items-start gap-2">
-                          <Check className="w-3.5 h-3.5 text-yellow-500 mt-1 flex-shrink-0" />
-                          <span className="text-gray-600 text-xs font-semibold leading-relaxed">{feature}</span>
+                          <Check className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{feature}</span>
                         </div>
                       ))}
                     </div>
 
-                    {/* Price and Action */}
-                    <div className="mt-auto">
-                      <div className="flex items-end justify-between mb-4">
-                        {/* <div>
-                          <div className="text-xs text-gray-500 mb-1 font-medium">Starting from</div>
-                          <div className="flex items-center">
-                            <span className="text-2xl font-black text-gray-900">
-                              ${product.discount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price}
-                            </span>
-                            {product.discount && (
-                              <span className="text-sm text-gray-400 line-through ml-2">${product.price}</span>
-                            )}
-                          </div>
-                        </div> */}
+                    {/* Footer Actions */}
+                    <div className="mt-auto pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="w-full sm:w-auto">
+                         {/* Price placeholder if needed */}
                       </div>
-
-                      <div className="flex gap-2">
-                        <button className="flex-1 py-3 bg-yellow-500 text-white font-bold rounded-xl hover:bg-yellow-600 transition-all duration-300 text-sm shadow-md hover:shadow-lg">
+                      <div className="flex gap-3 w-full sm:w-auto">
+                        <button className="flex-1 sm:flex-none px-8 py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-800 transition-all duration-300 text-sm shadow-md flex items-center justify-center gap-2">
+                          <Plus className="w-4 h-4" />
+                          Enquire Now
+                        </button>
+                        <button className="flex-1 sm:flex-none px-8 py-3 bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-all duration-300 text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                          <ShoppingCart className="w-4 h-4" />
                           Add to Quote
                         </button>
-                        {/* <button className="p-3 border-2 border-gray-100 text-gray-700 rounded-xl hover:border-yellow-500 hover:text-yellow-600 transition-all duration-300">
-                          <Plus className="w-5 h-5" />
-                        </button> */}
                       </div>
                     </div>
                   </div>

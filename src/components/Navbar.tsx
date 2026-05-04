@@ -82,12 +82,58 @@ const Navbar = () => {
         "Earthing Compound"
       ]
     },
-    { name: "Fencing & boundary solution", icon: <Grid className="w-5 h-5" />, subheadings: [] },
-    { name: "Cable management system", icon: <Zap className="w-5 h-5" />, subheadings: [] },
-    { name: "Street Lights & Lighting Solution", icon: <Lightbulb className="w-5 h-5" />, subheadings: [] },
-    { name: "Dwc Pipes & Its accessories", icon: <Droplets className="w-5 h-5" />, subheadings: [] },
-    { name: "Precast Boundary Wall", icon: <Layout className="w-5 h-5" />, subheadings: [] },
-    { name: "Fire safety System", icon: <Flame className="w-5 h-5" />, subheadings: [] },
+    { 
+      name: "Fencing & boundary solution", 
+      icon: <Grid className="w-5 h-5" />, 
+      subheadings: [
+        "PVC Chain Link Fence",
+        "GI Chain Link Fence",
+        "Barbed Wire",
+        "Concertina Coil",
+        "Tension Wires",
+        "Razor Panel",
+        "Wire Mesh"
+      ] 
+    },
+    { 
+      name: "Cable management system", 
+      icon: <Zap className="w-5 h-5" />, 
+      subheadings: [
+        "Gi cable tray (Hot dip galvanized)",
+        "Perforated cable tray",
+        "Cable tray support structures"
+      ] 
+    },
+    { 
+      name: "Street Lights & Lighting Solution", 
+      icon: <Lightbulb className="w-5 h-5" />, 
+      subheadings: [
+        "Solar Street Lights",
+        "Ac Street Lights"
+      ] 
+    },
+    { 
+      name: "Dwc Pipes & Its accessories", 
+      icon: <Droplets className="w-5 h-5" />, 
+      subheadings: [
+        "Dwc Pipes & Accessories"
+      ] 
+    },
+    { 
+      name: "Precast Boundary Wall", 
+      icon: <Layout className="w-5 h-5" />, 
+      subheadings: [
+        "Precast Boundary Wall"
+      ] 
+    },
+    { 
+      name: "Fire safety System", 
+      icon: <Flame className="w-5 h-5" />, 
+      subheadings: [
+        "Fire & Safety door",
+        "Certified Fire resistant doors"
+      ] 
+    },
   ];
 
   return (
