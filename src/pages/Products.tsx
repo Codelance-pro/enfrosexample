@@ -55,6 +55,26 @@ import tensionWire from '../assets/fencingImages/Tension Wires - 1.jpg';
 import wireMesh from '../assets/fencingImages/Wire Mesh.jpg';
 import fenceGuard from '../assets/fencingImages/5019340_PG1.jpg';
 
+// Import Cable Tray Images
+import giCableTray from '../assets/cableTray/GI Cable Tray (Hot Dip Galvanized) - 1.jpg';
+import perforatedCableTray from '../assets/cableTray/Perforated Cable Tray - 1.jpg';
+import cableTraySupport from '../assets/cableTray/Cable Tray Support Structures.jpg';
+
+// Import Street Light Images
+import acStreetLight from '../assets/streetLights/AC Street Lights - 2.jpg';
+import solarStreetLight from '../assets/streetLights/Solar Street Lights  - 3.jpg';
+
+// Import DWC Pipe Images
+import dwcPipeImage from '../assets/dwc/Astral_Telerex-v1.png.webp';
+
+// import banner image
+import slide1 from '../assets/slide/slide1.jpeg'
+import slide2 from '../assets/slide/slide2.jpeg'
+import slide3 from '../assets/slide/slide3.jpeg'
+import slide4 from '../assets/slide/slide4.png'
+import slide5 from '../assets/slide/slide5.png'
+
+
 // Type definitions
 interface ProductCategory {
   id: number;
@@ -121,9 +141,74 @@ const useScrollAnimation = () => {
   return { ref, isVisible };
 };
 
+const categorySEOData: Record<string, { metaTitle: string, metaDescription: string, content: string, products: string[], applications: string }> = {
+  'Earthing & Lightning Protection Solutions': {
+    metaTitle: "Earthing & Lightning Protection Solutions in India | ESE Lightning Arrester Supplier",
+    metaDescription: "Leading supplier of earthing and lightning protection solutions in India. Offering ESE lightning arresters, earthing rods, GI strips, and complete grounding systems for solar and industrial projects.",
+    content: "Protect your electrical systems and infrastructure with our reliable earthing and lightning protection solutions. Designed to safely discharge fault currents and lightning strikes, these products ensure maximum safety and long-term performance.",
+    products: [
+      "ESE Lightning Arrester",
+      "Copper Bonded Earthing Rod",
+      "Hot Dip GI Earthing Strip",
+      "Copper Strip",
+      "Conventional Lightning Arrester",
+      "Earthing Chamber (RCC & GI Cast Iron)",
+      "Earthing Compound"
+    ],
+    applications: "Solar power plants, substations, industries, commercial buildings"
+  },
+  'Fencing & Boundary Solutions': {
+    metaTitle: "Industrial Fencing & Boundary Solutions in India | Chain Link & Razor Wire Supplier",
+    metaDescription: "Top fencing solutions provider in India. We offer PVC & GI chain link fencing, barbed wire, concertina coils, and razor panels for solar farms and industrial security.",
+    content: "Secure your property with strong and reliable fencing systems built to withstand harsh environmental conditions and ensure long-term protection.",
+    products: [
+      "PVC Chain Link Fence",
+      "GI Chain Link Fence",
+      "Barbed Wire",
+      "Concertina Coil",
+      "Tension Wires",
+      "Razor Panel",
+      "Wire Mesh"
+    ],
+    applications: "Solar farms, factories, warehouses, land boundaries"
+  },
+  'Cable management system': {
+    metaTitle: "Cable Tray Manufacturer in India | GI & Perforated Cable Systems",
+    metaDescription: "Trusted cable tray manufacturer in India offering GI hot dip galvanized trays, perforated trays, and support structures for industrial cable management.",
+    content: "Ensure organized and safe cable routing with our durable cable management systems designed for easy installation and long-term performance.",
+    products: [
+      "GI Cable Tray (Hot Dip Galvanized)",
+      "Perforated Cable Tray",
+      "Cable Tray Support Structures"
+    ],
+    applications: "Industrial plants, commercial buildings, power infrastructure"
+  },
+  'Street Lights & Lighting Solution': {
+    metaTitle: "Solar & LED Street Light Solutions in India | Outdoor Lighting Supplier",
+    metaDescription: "Energy-efficient solar and AC street lighting solutions in India for roads, highways, and industrial areas with long-lasting performance.",
+    content: "We provide energy-efficient and high-performance lighting solutions for outdoor and industrial environments.",
+    products: [
+      "Solar Street Light",
+      "AC Street Light"
+    ],
+    applications: "Roads, highways, campuses, industrial areas"
+  },
+  'Dwc Pipes & Its accessories': {
+    metaTitle: "DWC Pipe Manufacturer in India | Double Wall Corrugated Pipes Supplier",
+    metaDescription: "High-quality DWC pipes for underground cable protection. Durable and corrosion-resistant solutions for electrical and telecom applications.",
+    content: "Our Double Wall Corrugated (DWC) pipes are designed for superior protection of underground cables and utilities.",
+    products: [
+      "High impact resistance",
+      "Corrosion & chemical resistant",
+      "Lightweight & easy installation"
+    ],
+    applications: "Electrical cabling, telecom infrastructure, drainage systems"
+  }
+};
+
 const Products: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'Earthing & Lighting protecting solution';
+  const initialCategory = searchParams.get('category') || 'Earthing & Lightning Protection Solutions';
   const initialSearch = searchParams.get('product') || '';
 
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
@@ -137,6 +222,25 @@ const Products: React.FC = () => {
     if (prod) setSearchQuery(prod);
   }, [searchParams]);
 
+  // Update document title and meta description based on selected category
+  useEffect(() => {
+    const seoData = categorySEOData[selectedCategory];
+    if (seoData) {
+      document.title = seoData.metaTitle;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', seoData.metaDescription);
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'description';
+        meta.content = seoData.metaDescription;
+        document.head.appendChild(meta);
+      }
+    } else {
+      document.title = 'Products | Codelance';
+    }
+  }, [selectedCategory]);
+
   // Stats & Refs
   const headerAnim = useScrollAnimation();
   const searchAnim = useScrollAnimation();
@@ -148,9 +252,9 @@ const Products: React.FC = () => {
 
   // Hero background images carousel
   const heroBgImages = [
-    'https://images.unsplash.com/photo-1594818379496-da1e345b0ded?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80'
+    slide5,
+    slide5,
+    slide5
   ];
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
@@ -165,7 +269,7 @@ const Products: React.FC = () => {
   const categories: ProductCategory[] = [
     {
       id: 1,
-      name: 'Earthing & Lighting protecting solution',
+      name: 'Earthing & Lightning Protection Solutions',
       description: 'Grounding and safety equipment',
       icon: <Shield className="w-8 h-8" />,
       color: 'from-green-500 to-emerald-500',
@@ -173,7 +277,7 @@ const Products: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Fencing & boundary solution',
+      name: 'Fencing & Boundary Solutions',
       description: 'Security and perimeter protection',
       icon: <Shield className="w-8 h-8" />,
       color: 'from-slate-500 to-slate-700',
@@ -399,7 +503,7 @@ const Products: React.FC = () => {
     {
       id: 9,
       name: 'Conventional Lightning Arrester',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Conventional Lightning Arresters provide dependable protection against lightning strikes by directing electrical discharge safely to the grounding system.',
       features: [
         'Solar Plant Protection',
@@ -422,7 +526,7 @@ const Products: React.FC = () => {
     {
       id: 10,
       name: 'ESE Lightning Arrester',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'ESE Lightning Arrester protects solar power plants from lightning strikes by capturing the lightning discharge and safely transferring the energy to the ground.',
       features: [
         'Solar Ground Mounted Power Plants',
@@ -445,7 +549,7 @@ const Products: React.FC = () => {
     {
       id: 11,
       name: 'Copper Bonded Earthing Rod',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Copper Bonded Earthing Rods provide strong and reliable grounding for solar installations with excellent conductivity and corrosion resistance.',
       features: [
         'Solar Module Structure ',
@@ -468,7 +572,7 @@ const Products: React.FC = () => {
     {
       id: 12,
       name: 'Pure Copper Strip',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Copper Strips provide high electrical conductivity and are widely used in solar grounding and lightning protection systems.',
       features: [
         'Inverter Earthing',
@@ -491,7 +595,7 @@ const Products: React.FC = () => {
     {
       id: 13,
       name: 'Advanced Earthing Compound',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Earthing Compound improves soil conductivity and reduces earth resistance for effective grounding performance.',
       features: [
         'Solar Plant Earthing Systems',
@@ -514,7 +618,7 @@ const Products: React.FC = () => {
     {
       id: 14,
       name: 'RCC Earthing Chamber',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Earthing Chambers are designed to protect earthing electrodes and allow easy inspection and maintenance.',
       features: [
         'Solar Plant Earthing Points',
@@ -537,7 +641,7 @@ const Products: React.FC = () => {
     {
       id: 15,
       name: 'Hot Dip GI Earthing Strip',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Hot Dip Galvanized Earthing Strips are used for effective grounding connections in solar plants and ensure safe discharge of fault currents.',
       features: [
         'Solar Structure Earthing',
@@ -560,7 +664,7 @@ const Products: React.FC = () => {
     {
       id: 16,
       name: 'Perforated Cable Tray',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'High-quality perforated cable trays for organized and safe routing of solar and earthing cables.',
       features: [
         'High Load Capacity',
@@ -584,7 +688,7 @@ const Products: React.FC = () => {
     {
       id: 17,
       name: 'Chemical Earthing Electrode',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Advanced chemical electrode with internal crystalline filling for ultra-low resistance earthing.',
       features: [
         'Pipe-in-Pipe Design',
@@ -608,7 +712,7 @@ const Products: React.FC = () => {
     {
       id: 18,
       name: 'Maintenance-Free Copper Rod',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Specialized copper rod designed for maintenance-free earthing in high resistivity soils.',
       features: [
         'Solid Core',
@@ -632,7 +736,7 @@ const Products: React.FC = () => {
     {
       id: 19,
       name: 'Industrial Pit Cover',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Cast iron pit covers for heavy industrial areas providing easy access to earthing nodes.',
       features: [
         'Cast Iron',
@@ -656,7 +760,7 @@ const Products: React.FC = () => {
     {
       id: 20,
       name: 'Complete Earthing Kit',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'All-in-one commercial earthing kit including electrode, compound, and chamber for quick installation.',
       features: [
         'Ready to Install',
@@ -680,7 +784,7 @@ const Products: React.FC = () => {
     {
       id: 21,
       name: 'Integrated Lightning System',
-      category: 'Earthing & Lighting protecting solution',
+      category: 'Earthing & Lightning Protection Solutions',
       description: 'Complete integrated lightning protection system for tall structures and high-value installations.',
       features: [
         'Total Protection',
@@ -704,7 +808,7 @@ const Products: React.FC = () => {
     {
       id: 22,
       name: 'High-Tensile Barbed Wire',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Barbed Wire is a cost-effective security fencing material with sharp barbs spaced along the wire to prevent unauthorized entry. We supply high-quality barbed wire suitable for various perimeter protection applications.',
       features: [
         'Agricultural fencing',
@@ -728,7 +832,7 @@ const Products: React.FC = () => {
     {
       id: 23,
       name: 'Concertina Coil Fence',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Concertina Coil is a high-security fencing solution made with razor-sharp blades formed into coils, designed to act as a strong deterrent against intrusion. We supply concertina coils for high-security perimeter protection.',
       features: [
         ' Solar power plant security',
@@ -752,7 +856,7 @@ const Products: React.FC = () => {
     {
       id: 24,
       name: 'GI Chain Link Fence',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'GI Chain Link Fence is a durable fencing solution made from galvanized steel wire, designed to provide strong and long-lasting perimeter protection. We supply high-quality chain link fencing suitable for various industrial and infrastructure applications.',
       features: [
         'Solar power plant perimeter fencing',
@@ -776,7 +880,7 @@ const Products: React.FC = () => {
     {
       id: 25,
       name: 'PVC Coated Chain Link',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'PVC Chain Link Fence consists of galvanized steel wire coated with protective PVC, offering enhanced resistance against rust, weather, and corrosion. We supply reliable fencing solutions suitable for outdoor installations.',
       features: [
         'Solar farm fencing',
@@ -800,7 +904,7 @@ const Products: React.FC = () => {
     {
       id: 26,
       name: 'Professional Razor Panel',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Razor Panels are high-security fencing panels integrated with razor wire to provide enhanced perimeter protection. We supply durable razor panels suitable for sensitive and restricted areas.',
       features: [
         'Power plants and solar farms',
@@ -824,7 +928,7 @@ const Products: React.FC = () => {
     {
       id: 27,
       name: 'High-Tension Core Wires',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Tension Wires are strong galvanized wires used to support and tighten chain link fencing systems, ensuring stability and proper alignment of the fence structure.',
       features: [
         'Chain link fence installation',
@@ -848,7 +952,7 @@ const Products: React.FC = () => {
     {
       id: 28,
       name: 'Rigid Wire Mesh Fence',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Wire Mesh is a versatile fencing and screening material made from interwoven steel wires forming a strong grid structure. We supply quality wire mesh suitable for various industrial and construction applications.',
       features: [
         'Construction and infrastructure projects',
@@ -872,7 +976,7 @@ const Products: React.FC = () => {
     {
       id: 29,
       name: 'Solar Fence Energizer Guard',
-      category: 'Fencing & boundary solution',
+      category: 'Fencing & Boundary Solutions',
       description: 'Specialized protective housing for solar fence energizers, providing weather protection and security.',
       features: [
         'Weather Resistant',
@@ -892,6 +996,150 @@ const Products: React.FC = () => {
       imageUrl: fenceGuard,
       isFeatured: true,
       tags: ['Electronic', 'Guardian', 'Premium']
+    },
+    {
+      id: 30,
+      name: 'GI Cable Tray (Hot Dip Galvanized)',
+      category: 'Cable management system',
+      description: 'GI Cable Trays provide a robust and organized solution for supporting and routing electrical cables in industrial and commercial installations.',
+      features: [
+        'Hot Dip Galvanized',
+        'Corrosion Resistant',
+        'High Load Capacity',
+        'Durable Construction'
+      ],
+      specifications: [
+        { key: 'Material', value: 'Galvanized Iron' },
+        { key: 'Coating', value: 'Hot Dip Galvanized' },
+        { key: 'Application', value: 'Industrial/Commercial' },
+        { key: 'Durability', value: 'High' }
+      ],
+      price: 45.00,
+      rating: 4.8,
+      reviews: 24,
+      imageUrl: giCableTray,
+      isFeatured: true,
+      tags: ['Industrial', 'Routing', 'Heavy Duty']
+    },
+    {
+      id: 31,
+      name: 'Perforated Cable Tray',
+      category: 'Cable management system',
+      description: 'Perforated Cable Trays are designed to provide sturdy support and organized routing for electrical cables, with perforations that allow heat dissipation and easy cable fixing.',
+      features: [
+        'Excellent Ventilation',
+        'Easy Cable Fixing',
+        'Lightweight',
+        'Sturdy Support'
+      ],
+      specifications: [
+        { key: 'Type', value: 'Perforated' },
+        { key: 'Ventilation', value: 'High' },
+        { key: 'Installation', value: 'Easy' },
+        { key: 'Use Case', value: 'Indoor/Outdoor' }
+      ],
+      price: 35.00,
+      rating: 4.6,
+      reviews: 18,
+      imageUrl: perforatedCableTray,
+      isFeatured: false,
+      tags: ['Ventilated', 'Cable Management', 'Support']
+    },
+    {
+      id: 32,
+      name: 'Cable Tray Support Structures',
+      category: 'Cable management system',
+      description: 'Cable Tray Support Structures provide stable and secure mounting for cable trays, ensuring organized and safe cable management in all types of installations.',
+      features: [
+        'Stable Mounting',
+        'Secure Fixing',
+        'Adjustable Height',
+        'Versatile Design'
+      ],
+      specifications: [
+        { key: 'Material', value: 'Mild Steel/GI' },
+        { key: 'Stability', value: 'High' },
+        { key: 'Mounting Type', value: 'Wall/Ceiling/Floor' },
+        { key: 'Load Bearing', value: 'Heavy Duty' }
+      ],
+      price: 25.00,
+      rating: 4.7,
+      reviews: 32,
+      imageUrl: cableTraySupport,
+      isFeatured: false,
+      tags: ['Mounting', 'Structure', 'Secure']
+    },
+    {
+      id: 33,
+      name: 'Solar Street Lights',
+      category: 'Street Lights & Lighting Solution',
+      description: 'Solar Street Lights are energy-efficient lighting solutions powered by solar energy, ideal for outdoor and off-grid lighting applications.',
+      features: [
+        'Energy Efficient',
+        'Solar Powered',
+        'Off-grid Ready',
+        'Durable Construction'
+      ],
+      specifications: [
+        { key: 'Power Source', value: 'Solar' },
+        { key: 'Type', value: 'Outdoor LED' },
+        { key: 'Application', value: 'Streets/Highways' },
+        { key: 'Efficiency', value: 'High' }
+      ],
+      price: 120.00,
+      rating: 4.8,
+      reviews: 45,
+      imageUrl: solarStreetLight,
+      isFeatured: true,
+      tags: ['Solar', 'Outdoor', 'Efficient']
+    },
+    {
+      id: 34,
+      name: 'AC Street Lights',
+      category: 'Street Lights & Lighting Solution',
+      description: 'AC Street Lights are reliable outdoor lighting solutions powered directly from the electrical grid, providing consistent and bright illumination.',
+      features: [
+        'Grid Powered',
+        'Consistent Brightness',
+        'High Illumination',
+        'Long Lifespan'
+      ],
+      specifications: [
+        { key: 'Power Source', value: 'AC Grid' },
+        { key: 'Type', value: 'LED' },
+        { key: 'Application', value: 'Roads/Campuses' },
+        { key: 'Brightness', value: 'High Lumen' }
+      ],
+      price: 85.00,
+      rating: 4.6,
+      reviews: 32,
+      imageUrl: acStreetLight,
+      isFeatured: false,
+      tags: ['AC Powered', 'Bright', 'Reliable']
+    },
+    {
+      id: 35,
+      name: 'DWC PIPES',
+      category: 'Dwc Pipes & Its accessories',
+      description: 'DWC (Double Wall Corrugated) Pipes are lightweight yet strong pipes used for underground cable protection, drainage, and irrigation systems.',
+      features: [
+        'High Impact Resistance',
+        'Corrosion & Chemical Resistant',
+        'Lightweight & Easy Installation',
+        'Long Service Life'
+      ],
+      specifications: [
+        { key: 'Material', value: 'HDPE' },
+        { key: 'Type', value: 'Double Wall Corrugated' },
+        { key: 'Application', value: 'Underground Wiring' },
+        { key: 'Durability', value: 'High' }
+      ],
+      price: 20.00,
+      rating: 4.7,
+      reviews: 58,
+      imageUrl: dwcPipeImage,
+      isFeatured: true,
+      tags: ['DWC', 'Corrugated', 'Cable Protection', 'Dwc Pipes & Accessories']
     }
   ];
 
@@ -986,7 +1234,7 @@ const Products: React.FC = () => {
         <div className="fixed top-1/2 left-1/2 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }}></div>
 
         {/* Header Hero Section */}
-        <div className="relative -mt-2 mb-16 h-[400px] flex items-center justify-center overflow-hidden w-[100vw] ml-[calc(-50vw+50%)]">
+        <div className="relative -mt-2 mb-16 h-[450px] flex items-center justify-center overflow-hidden w-[100vw] ml-[calc(-50vw+50%)]">
           {/* Scrollable Background Image wrapper */}
           {heroBgImages.map((img, index) => (
             <div 
@@ -1138,11 +1386,65 @@ const Products: React.FC = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-12">
-              {filteredProducts.map((product, index) => (
-                <div
-                  key={product.id}
-                  className={`group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'}`}
-                >
+              
+              {/* Top Section: Category Content Passage */}
+              {selectedCategory !== 'all' && categorySEOData[selectedCategory] && (
+                <div className="w-full bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-xl mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight text-center">
+                    {categorySEOData[selectedCategory].metaTitle}
+                  </h2>
+                  <p className="text-gray-600 mb-8 text-center max-w-4xl mx-auto text-lg leading-relaxed">
+                    {categorySEOData[selectedCategory].metaDescription}
+                  </p>
+                  
+                  <div className="grid md:grid-cols-3 gap-8 mt-12 pt-8 border-t border-gray-100">
+                    <div className="md:col-span-1">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <Grid className="w-6 h-6 text-yellow-500" />
+                        Overview
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
+                        {categorySEOData[selectedCategory].content}
+                      </p>
+                    </div>
+
+                    <div className="md:col-span-1">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <Package className="w-6 h-6 text-yellow-500" />
+                        Our Products
+                      </h3>
+                      <ul className="space-y-3">
+                        {categorySEOData[selectedCategory].products.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm lg:text-base text-gray-700 font-medium">
+                            <div className="w-5 h-5 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <Check className="w-3 h-3 text-yellow-600" />
+                            </div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="md:col-span-1">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <MapPin className="w-6 h-6 text-yellow-500" />
+                        Applications
+                      </h3>
+                      <p className="text-gray-600 text-sm lg:text-base leading-relaxed bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                        {categorySEOData[selectedCategory].applications}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Bottom Section: Products Grid List */}
+              <div className="flex flex-col gap-12 w-full">
+                {filteredProducts.map((product, index) => (
+                  <div
+                    key={product.id}
+                    className={`group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'}`}
+                  >
                   {/* Left Side: Product Image & Badges */}
                   <div className="md:w-[40%] lg:w-[35%] bg-gray-50/50 flex flex-col items-center justify-center p-8 relative border-b md:border-b-0 md:border-r border-gray-100">
                     <img
@@ -1227,6 +1529,7 @@ const Products: React.FC = () => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           )}
         </section>

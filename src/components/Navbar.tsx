@@ -70,7 +70,7 @@ const Navbar = () => {
 
   const productCategories = [
     {
-      name: "Earthing & Lighting protecting solution",
+      name: "Earthing & Lightning Protection Solutions",
       icon: <Shield className="w-5 h-5" />,
       subheadings: [
         "ESE Lightning Arrester",
@@ -83,7 +83,7 @@ const Navbar = () => {
       ]
     },
     { 
-      name: "Fencing & boundary solution", 
+      name: "Fencing & Boundary Solutions", 
       icon: <Grid className="w-5 h-5" />, 
       subheadings: [
         "PVC Chain Link Fence",
