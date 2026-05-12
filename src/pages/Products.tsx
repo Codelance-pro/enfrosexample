@@ -67,6 +67,13 @@ import solarStreetLight from '../assets/streetLights/Solar Street Lights  - 3.jp
 // Import DWC Pipe Images
 import dwcPipeImage from '../assets/dwc/Astral_Telerex-v1.png.webp';
 
+// Import Fire Safety Images
+import fireSafetyImage1 from '../assets/fireSafety/fire safety image.jpg';
+import fireSafetyImage2 from '../assets/fireSafety/FIRE SAFETY DOOR IMAGE new-product-500x500.webp';
+
+// Import Precast Boundary Wall Images
+import precastBoundaryImage from '../assets/precast/Precast-Boundary.jpg';
+
 // import banner image
 import slide1 from '../assets/slide/slide1.jpeg'
 import slide2 from '../assets/slide/slide2.jpeg'
@@ -203,6 +210,26 @@ const categorySEOData: Record<string, { metaTitle: string, metaDescription: stri
       "Lightweight & easy installation"
     ],
     applications: "Electrical cabling, telecom infrastructure, drainage systems"
+  },
+  'Fire safety System': {
+    metaTitle: "Fire Safety Systems Supplier in India | Fire Rated Doors",
+    metaDescription: "Reliable fire safety systems including fire-rated doors for industrial and commercial buildings ensuring safety and compliance.",
+    content: "Ensure safety and compliance with our high-quality fire protection products designed to safeguard life and property.",
+    products: [
+      "Fire & Safety Door",
+      "Certified Fire-Resistant Doors"
+    ],
+    applications: "Industrial facilities, commercial buildings, warehouses. Suitable for Control Rooms, Inverter Rooms, Substations, and Electrical Panel Rooms."
+  },
+  'Precast Boundary Wall': {
+    metaTitle: "Precast Boundary Wall in Chennai | Durable Concrete Boundary Walls",
+    metaDescription: "High-quality precast boundary walls for residential, commercial, and industrial projects. Durable, cost-effective, fast installation, and low maintenance concrete wall solutions in Chennai.",
+    content: "Precast boundary walls provide strong and secure protection for solar plants and industrial sites. They are highly durable, cost-effective, and quick to install, making them an ideal solution for safeguarding solar panels and valuable equipment from external threats and environmental damage.",
+    products: [
+      "Precast Boundary Walls",
+      "Fencing Solutions"
+    ],
+    applications: "Residential, Commercial, Industrial, Warehouses, Farms, Solar Plants, Construction Sites, and Infrastructure Projects."
   }
 };
 
@@ -1140,6 +1167,78 @@ const Products: React.FC = () => {
       imageUrl: dwcPipeImage,
       isFeatured: true,
       tags: ['DWC', 'Corrugated', 'Cable Protection', 'Dwc Pipes & Accessories']
+    },
+    {
+      id: 36,
+      name: 'Fire & Safety door',
+      category: 'Fire safety System',
+      description: 'Fire-Rated Doors built to prevent the spread of fire and smoke. Designed for industrial and commercial environments, ensuring optimal safety and compliance with fire safety norms.',
+      features: [
+        'Fire-Rated Protection',
+        'Smoke Prevention',
+        'Durable Construction',
+        'Compliance with Norms'
+      ],
+      specifications: [
+        { key: 'Material', value: 'Galvanized Steel' },
+        { key: 'Application', value: 'Control/Inverter Rooms' },
+        { key: 'Fire Rating', value: '120 Mins' },
+        { key: 'Compliance', value: 'Standard Safety Norms' }
+      ],
+      price: 250.00,
+      rating: 4.8,
+      reviews: 42,
+      imageUrl: fireSafetyImage1,
+      isFeatured: true,
+      tags: ['Safety', 'Fire Rated', 'Door']
+    },
+    {
+      id: 37,
+      name: 'Certified Fire resistant doors',
+      category: 'Fire safety System',
+      description: 'Certified fire-resistant doors suitable for Substations, Electrical Panel Rooms, and Control Rooms. Engineered to withstand high temperatures and prevent hazards.',
+      features: [
+        'Certified Fire Resistant',
+        'High Temperature Tolerance',
+        'Industrial Grade',
+        'Secure Hardware'
+      ],
+      specifications: [
+        { key: 'Material', value: 'Steel/Heavy Duty' },
+        { key: 'Application', value: 'Substations/Panel Rooms' },
+        { key: 'Fire Rating', value: 'Up to 180 Mins' },
+        { key: 'Certification', value: 'Certified' }
+      ],
+      price: 320.00,
+      rating: 4.9,
+      reviews: 28,
+      imageUrl: fireSafetyImage2,
+      isFeatured: false,
+      tags: ['Certified', 'Fire Resistant', 'Industrial']
+    },
+    {
+      id: 38,
+      name: 'Precast Boundary Wall',
+      category: 'Precast Boundary Wall',
+      description: 'Precast Boundary Wall is a durable and cost-effective concrete fencing solution made with precast panels and pillars. It provides strong perimeter protection and quick installation compared to traditional brick walls.',
+      features: [
+        'Durable Concrete',
+        'Cost-Effective',
+        'Quick Installation',
+        'Low Maintenance'
+      ],
+      specifications: [
+        { key: 'Material', value: 'Precast Concrete' },
+        { key: 'Application', value: 'Perimeter Fencing' },
+        { key: 'Installation', value: 'Fast/Modular' },
+        { key: 'Durability', value: 'High' }
+      ],
+      price: 150.00,
+      rating: 4.8,
+      reviews: 65,
+      imageUrl: precastBoundaryImage,
+      isFeatured: true,
+      tags: ['Precast', 'Concrete', 'Boundary', 'Wall']
     }
   ];
 
