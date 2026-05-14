@@ -78,7 +78,7 @@ import precastBoundaryImage from '../assets/precast/Precast-Boundary.jpg';
 import slide1 from '../assets/slide/slide1.jpeg'
 import slide2 from '../assets/slide/slide2.jpeg'
 import slide3 from '../assets/slide/slide3.jpeg'
-import slide4 from '../assets/slide/slide4.png'
+import slide4 from '../assets/slide/slide6.jpeg'
 import slide5 from '../assets/slide/slide5.png'
 
 
@@ -280,8 +280,7 @@ const Products: React.FC = () => {
   // Hero background images carousel
   const heroBgImages = [
     slide5,
-    slide5,
-    slide5
+    slide4,
   ];
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
