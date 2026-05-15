@@ -77,7 +77,7 @@ const Careers = () => {
     {
       title: "Safety Supervisor",
       slug: "safety-supervisor",
-      location: "Chennai",
+      location: "",
       type: "Full-Time",
       icon: <ShieldCheck className="w-16 h-16 text-red-500" />,
       desc: "Enforce HSE policies, identify hazards, and ensure a zero-incident site."
@@ -109,7 +109,7 @@ const Careers = () => {
     {
       title: "Business Development Manager",
       slug: "business-development-manager",
-      location: "Perumbakkam, Chennai",
+      location: "",
       type: "Full-Time",
       icon: <Handshake className="w-16 h-16 text-cyan-500" />,
       desc: "We are looking to onboard an experienced Business Development Manager – Solar Ground Mounted (Civil) to take end-to-end ownership of project execution. "

@@ -222,8 +222,8 @@ const categorySEOData: Record<string, { metaTitle: string, metaDescription: stri
     applications: "Industrial facilities, commercial buildings, warehouses. Suitable for Control Rooms, Inverter Rooms, Substations, and Electrical Panel Rooms."
   },
   'Precast Boundary Wall': {
-    metaTitle: "Precast Boundary Wall in Chennai | Durable Concrete Boundary Walls",
-    metaDescription: "High-quality precast boundary walls for residential, commercial, and industrial projects. Durable, cost-effective, fast installation, and low maintenance concrete wall solutions in Chennai.",
+    metaTitle: "Precast Boundary Wall | Durable Concrete Boundary Walls",
+    metaDescription: "High-quality precast boundary walls for residential, commercial, and industrial projects. Durable, cost-effective, fast installation, and low maintenance concrete wall solutions.",
     content: "Precast boundary walls provide strong and secure protection for solar plants and industrial sites. They are highly durable, cost-effective, and quick to install, making them an ideal solution for safeguarding solar panels and valuable equipment from external threats and environmental damage.",
     products: [
       "Precast Boundary Walls",
@@ -246,7 +246,7 @@ const Products: React.FC = () => {
     const cat = searchParams.get('category');
     const prod = searchParams.get('product');
     if (cat) setSelectedCategory(cat);
-    if (prod) setSearchQuery(prod);
+    setSearchQuery(prod || '');
   }, [searchParams]);
 
   // Update document title and meta description based on selected category
@@ -1332,41 +1332,42 @@ const Products: React.FC = () => {
         <div className="fixed top-1/2 left-1/2 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }}></div>
 
         {/* Header Hero Section */}
-        <div className="relative -mt-2 mb-16 h-[450px] flex items-center justify-center overflow-hidden w-[100vw] ml-[calc(-50vw+50%)]">
-          {/* Scrollable Background Image wrapper */}
-          {heroBgImages.map((img, index) => (
-            <div 
-              key={index}
-              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-                index === currentHeroIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{ 
-                backgroundImage: `url("${img}")`,
-                backgroundAttachment: 'fixed', // This makes the image scrollable/parallax
-                filter: 'brightness(0.3)'
-              }}
-            />
-          ))}
-          
-          <div className="relative z-10 text-center px-4" ref={headerAnim.ref}>
-            <div className={`transition-all duration-1000 ${headerAnim.isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                {selectedCategory !== 'all' ? selectedCategory : 'Our Products'}
-              </h1>
-              <div className="flex items-center justify-center gap-2 text-sm md:text-base text-gray-300">
-                <span>Home</span>
-                <ChevronRight className="w-4 h-4" />
-                <span>Products</span>
-                {selectedCategory !== 'all' && (
-                  <>
-                    <ChevronRight className="w-4 h-4" />
-                    <span className="text-yellow-400">{selectedCategory}</span>
-                  </>
-                )}
+        {!searchQuery && (
+          <div className="relative -mt-2 mb-16 h-screen flex items-center justify-center overflow-hidden w-[100vw] ml-[calc(-50vw+50%)]">
+            {/* Scrollable Background Image wrapper */}
+            {heroBgImages.map((img, index) => (
+              <div 
+                key={index}
+                className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+                  index === currentHeroIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ 
+                  backgroundImage: `url("${img}")`,
+                  filter: 'brightness(0.4)'
+                }}
+              />
+            ))}
+            
+            <div className="relative z-10 text-center px-4" ref={headerAnim.ref}>
+              <div className={`transition-all duration-1000 ${headerAnim.isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                  {selectedCategory !== 'all' ? selectedCategory : 'Our Products'}
+                </h1>
+                <div className="flex items-center justify-center gap-2 text-sm md:text-base text-gray-300">
+                  <span>Home</span>
+                  <ChevronRight className="w-4 h-4" />
+                  <span>Products</span>
+                  {selectedCategory !== 'all' && (
+                    <>
+                      <ChevronRight className="w-4 h-4" />
+                      <span className="text-yellow-400">{selectedCategory}</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Search and Filter Section */}
         {/* <div
@@ -1486,7 +1487,7 @@ const Products: React.FC = () => {
             <div className="flex flex-col gap-12">
               
               {/* Top Section: Category Content Passage */}
-              {selectedCategory !== 'all' && categorySEOData[selectedCategory] && (
+              {selectedCategory !== 'all' && categorySEOData[selectedCategory] && !searchQuery && (
                 <div className="w-full bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-xl mb-4">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight text-center">
                     {categorySEOData[selectedCategory].metaTitle}
@@ -1537,10 +1538,11 @@ const Products: React.FC = () => {
               )}
 
               {/* Bottom Section: Products Grid List */}
-              <div className="flex flex-col gap-12 w-full">
-                {filteredProducts.map((product, index) => (
-                  <div
-                    key={product.id}
+              {(selectedCategory === 'all' || searchQuery !== '') && (
+                <div className="flex flex-col gap-12 w-full mt-4">
+                  {filteredProducts.map((product, index) => (
+                    <div
+                      key={product.id}
                     className={`group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'}`}
                   >
                   {/* Left Side: Product Image & Badges */}
@@ -1618,16 +1620,17 @@ const Products: React.FC = () => {
                           <Plus className="w-4 h-4" />
                           Enquire Now
                         </button>
-                        <button className="flex-1 sm:flex-none px-8 py-3 bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-all duration-300 text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                        {/* <button className="flex-1 sm:flex-none px-8 py-3 bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-all duration-300 text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2">
                           <ShoppingCart className="w-4 h-4" />
                           Add to Quote
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
-              </div>
+                </div>
+              )}
             </div>
           )}
         </section>

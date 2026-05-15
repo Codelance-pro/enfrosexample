@@ -167,19 +167,14 @@ const Navbar = () => {
                   const setOpen = item.dropdownType === 'services' ? setIsServicesDropdownOpen : setIsProductsDropdownOpen;
 
                   return (
-                    <div
-                      key={item.name}
-                      className="relative"
-                      onMouseEnter={() => setOpen(true)}
-                      onMouseLeave={() => {
-                        setOpen(false);
-                        if (item.dropdownType === 'products') setHoveredCategory(null);
-                      }}
-                    >
-                      <button
-                        onClick={() => goToPage(item.path)}
-                        className="relative group flex items-center gap-1 px-3 py-2 text-gray-800 font-semibold text-lg xl:text-lg hover:text-yellow-600 transition-colors duration-200"
+                      <div
+                        key={item.name}
+                        className="relative"
                       >
+                        <button
+                          onClick={() => setOpen(!isOpen)}
+                          className="relative group flex items-center gap-1 px-3 py-2 text-gray-800 font-semibold text-lg xl:text-lg hover:text-yellow-600 transition-colors duration-200"
+                        >
                         {item.name}
                         <ChevronDown
                           className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-yellow-500" : ""

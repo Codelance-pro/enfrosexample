@@ -95,16 +95,6 @@ const Contact: React.FC = () => {
   // Office locations data
   const offices = [
     {
-      id: 1,
-      city: 'Chennai',
-      country: 'India',
-      address: 'No.6, Indra Priyadarshini Nagar, Perumbakkam, Chennai – 600100',
-      phone: '+91 98765 43210',
-      email: 'info@enfrosindia.com',
-      workingHours: 'Mon-Sat: 9AM-6PM EST',
-      coordinates: { lat: 40.7128, lng: -74.0060 }
-    },
-    {
       id: 2,
       city: 'Pudukkottai',
       country: 'India',
@@ -701,14 +691,6 @@ const Contact: React.FC = () => {
               <div className="bg-white rounded-2xl border border-yellow-200 p-6 shadow-lg">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Headquarters</h3>
                 <div className="space-y-4">
-                  <div className="flex items-start">
-                    <MapPin className="w-5 h-5 text-yellow-600 mt-1 mr-3 flex-shrink-0" />
-                    <div>
-                      <div className="text-gray-900 font-medium">Chennai</div>
-                      <div className="text-gray-500 text-sm">No.6, Indra Priyadarshini Nagar, Perumbakkam, Chennai – 600100</div>
-                      <div className="text-gray-500 text-sm">India</div>
-                    </div>
-                  </div>
                   <div className="flex items-center">
                     <Phone className="w-5 h-5 text-yellow-600 mr-3 flex-shrink-0" />
                     <span className="text-gray-700">+91 98765 43210</span>

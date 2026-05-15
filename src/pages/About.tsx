@@ -298,7 +298,7 @@ const About: React.FC = () => {
                   { value: '16+', label: 'Years Experience' },
                   { value: '2000+', label: 'MW Completed' },
                   { value: 'EPC', label: 'Turnkey Solutions' },
-                  { value: 'Chennai', label: 'Headquarters' }
+                  { value: 'India', label: 'Headquarters' }
                 ].map((stat, i) => (
                   <div key={i} className="bg-amber-50 border border-amber-200 rounded-xl p-5">
                     <div className="text-2xl font-bold text-amber-700 mb-1">{stat.value}</div>
@@ -308,7 +308,7 @@ const About: React.FC = () => {
               </div> */}
               {/* <div className="flex items-center mt-6 text-gray-600 text-sm">
                 <MapPin className="w-4 h-4 mr-2 text-amber-600 shrink-0" />
-                <span>Headquartered in Chennai, Tamil Nadu, India</span>
+                <span>Headquartered in Tamil Nadu, India</span>
               </div> */}
             </div>
           </div>
