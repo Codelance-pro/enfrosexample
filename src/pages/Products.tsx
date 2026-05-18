@@ -36,12 +36,12 @@ import eseLightningArrester from '../assets/earthingImages/ESE Lightning Arreste
 import copperBondedRod from '../assets/earthingImages/Copper Bonded Earthing Rod.jpg';
 import copperStrip from '../assets/earthingImages/Copper Strip.jpg';
 import earthingCompound from '../assets/earthingImages/EARTHING COMPOUND.png';
-import earthingChamber from '../assets/earthingImages/Earthing Chamber (RCC & GI Cast Iron).jpg';
+import earthingChamber from '../assets/earthingImages/earthingchamper.jpeg';
 import giEarthingStrip from '../assets/earthingImages/Hot Dip GI Earthing Strip.jpg';
 import cableTray from '../assets/earthingImages/Tray Type Cable Tray.png';
 import chemicalRod from '../assets/earthingImages/61kJFyrV6dL._AC_UF894,1000_QL80_.jpg';
 import maintenanceFreeRod from '../assets/earthingImages/Earthing rod copper bonded.jpg';
-import pitCover from '../assets/earthingImages/Earthing Chamber (RCC & Gi cast iron)(1).jpg';
+import pitCover from '../assets/earthingImages/earthingchamper.jpeg';
 import commercialKit from '../assets/earthingImages/ChatGPT Image Feb 5, 2026, 11_24_14 AM.png';
 import lightningSystem from '../assets/earthingImages/ph19871.jpg.webp';
 
@@ -1276,13 +1276,23 @@ const Products: React.FC = () => {
   // Filter products based on category and search
   const filteredProducts = products.filter(product => {
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    
+    const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/s$/, '');
+    const normSearch = normalize(searchQuery);
+    const normName = normalize(product.name);
+
     const matchesSearch = searchQuery === '' ||
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      searchQuery.toLowerCase().includes(product.name.toLowerCase()) ||
+      normSearch.includes(normName) ||
+      normName.includes(normSearch) ||
+      (normSearch.includes('earthing') && normSearch.includes('chamber') && normName.includes('earthing') && normName.includes('chamber')) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return matchesCategory && matchesSearch;
   });
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 via-yellow-50 to-amber-100 pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -1546,11 +1556,11 @@ const Products: React.FC = () => {
                     className={`group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row ${productsAnim.isVisible ? `animate-scale-in stagger-${index % 4 + 1}` : 'opacity-0'}`}
                   >
                   {/* Left Side: Product Image & Badges */}
-                  <div className="md:w-[40%] lg:w-[35%] bg-gray-50/50 flex flex-col items-center justify-center p-8 relative border-b md:border-b-0 md:border-r border-gray-100">
+                  <div className="md:w-[40%] lg:w-[35%] bg-gray-50/50 flex flex-col items-center justify-center relative border-b md:border-b-0 md:border-r border-gray-100 overflow-hidden min-h-[250px] md:min-h-[300px]">
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="max-h-[300px] object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-[900px] h-full object-fit group-hover:scale-105 transition-transform duration-500"
                     />
                     {product.isFeatured && (
                       <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] uppercase font-bold px-3 py-1 rounded shadow-sm z-10">
@@ -1571,13 +1581,13 @@ const Products: React.FC = () => {
                       <span className="text-[11px] uppercase tracking-wider font-bold text-yellow-600">
                         {product.category}
                       </span>
-                      {product.rating > 0 && (
+                      {/* {product.rating > 0 && (
                         <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md">
                           <Star className="w-4 h-4 text-yellow-500 fill-current" />
                           <span className="text-gray-900 text-sm font-bold">{product.rating}</span>
                           <span className="text-gray-400 text-xs ml-1">({product.reviews})</span>
                         </div>
-                      )}
+                      )} */}
                     </div>
 
                     {/* Title & Description */}

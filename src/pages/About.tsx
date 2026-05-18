@@ -37,6 +37,9 @@ import client14 from "../assets/client14.jpeg";
 import client15 from "../assets/client15.jpeg";
 import client16 from "../assets/client16.png";
 
+import about from '../assets/about-home.png'
+import abouthome from '../assets/homepage2.png'
+
 // Intersection Observer Hook for scroll animations
 const useScrollAnimation = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -68,10 +71,12 @@ const About: React.FC = () => {
   const clientsAnim = useScrollAnimation();
 
   const teamMembers = [
-    { id: 1, name: "KARTHICK RAMAIAH", role: "Managing Director", description: "Expertly leading Enfros with proven project expertise", imageUrl: "" },
-    { id: 2, name: "IGNASI", role: "Director - Operation", description: "AI & Machine Learning expert", imageUrl: "" },
-    { id: 3, name: "JEGANIDHI KRISHNAN", role: "Director - Technical", description: "Operations management specialist", imageUrl: "" },
-    { id: 4, name: "S.SHANTHI", role: "Director - Commercial", description: "Product development leader", imageUrl: "" },
+    { id: 1, name: "S.KARTHICK RAMAIAH", role: "Managing Director", description: "Expertly leading Enfros with proven project expertise", imageUrl: "" },
+    { id: 2, name: "S.SHANTHI", role: "Director - Commercial", description: "Product development leader", imageUrl: "" },
+    { id: 3, name: "JEGANIDHI KRISHNAN", role: "HOD, Technical", description: "Operations management specialist", imageUrl: "" },
+    { id: 4, name: "IGNASI", role: "HOD, Operation", description: "AI & Machine Learning expert", imageUrl: "" },
+    
+    
   ];
 
   const coreValues = [
@@ -138,7 +143,7 @@ const About: React.FC = () => {
         .hero-banner .hero-bg {
           position: absolute;
           inset: 0;
-          background-image: url('https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?w=1600&h=700&fit=crop');
+          background-image: url(${abouthome});
           background-size: cover;
           background-position: center right;
           z-index: 0;
@@ -275,7 +280,7 @@ const About: React.FC = () => {
 
 
             <div className={`rounded-2xl overflow-hidden shadow-xl ${aboutAnim.isVisible ? 'anim-up' : 'opacity-0'} order-2 lg:order-1`}>
-              <img src="https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?w=800&h=600&fit=crop" alt="Solar farm" className="w-full h-48 md:h-auto object-cover" />
+              <img src={about} alt="Solar farm" className="w-full h-48 md:h-auto object-cover" />
             </div>
 
             {/* Right: content */}

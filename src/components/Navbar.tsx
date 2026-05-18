@@ -376,7 +376,7 @@ const Navbar = () => {
                   <div key={item.name}>
                     <button
                       onClick={() => setDropdownOpen(!isDropdownOpen)}
-                      className="w-full flex items-center justify-between px-4 py-4 rounded-xl text-white hover:bg-white/5 transition-colors"
+                      className="w-full flex items-center justify-between px-4 py-4 rounded-xl text-black hover:bg-white/5 transition-colors"
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-yellow-400">{item.icon}</span>
@@ -394,21 +394,21 @@ const Navbar = () => {
                           <>
                             <button
                               onClick={() => goToPage("/services")}
-                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                              className="flex items-center gap-3 px-4 py-3 text-black hover:text-white hover:bg-white/5 rounded-xl transition-colors"
                             >
                               <Phone className="w-5 h-5 text-yellow-500" />
                               <span>All Services</span>
                             </button>
                             <button
                               onClick={() => goToPage("/calculator")}
-                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                              className="flex items-center gap-3 px-4 py-3 text-black hover:text-white hover:bg-white/5 rounded-xl transition-colors"
                             >
                               <Calculator className="w-5 h-5 text-yellow-500" />
                               <span>Solar Calculator</span>
                             </button>
                             <button
                               onClick={() => goToPage("/blog")}
-                              className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                              className="flex items-center gap-3 px-4 py-3 text-black hover:text-white hover:bg-white/5 rounded-xl transition-colors"
                             >
                               <BookOpen className="w-5 h-5 text-yellow-500" />
                               <span>Blog &amp; Insights</span>
@@ -420,7 +420,7 @@ const Navbar = () => {
                               <div key={cat.name}>
                                 <button
                                   onClick={() => cat.subheadings.length > 0 ? setMobileExpandedCategory(mobileExpandedCategory === cat.name ? null : cat.name) : goToPage(`/products?category=${encodeURIComponent(cat.name)}`)}
-                                  className="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                                  className="w-full flex items-center justify-between px-4 py-3 text-black hover:text-black hover:bg-white/5 rounded-xl transition-colors"
                                 >
                                   <div className="flex items-center gap-3">
                                     <span className="text-yellow-600/70">{cat.icon}</span>
@@ -436,7 +436,7 @@ const Navbar = () => {
                                       <button
                                         key={sub}
                                         onClick={() => goToPage(`/products?category=${encodeURIComponent(cat.name)}&product=${encodeURIComponent(sub)}`)}
-                                        className="text-left px-4 py-2 text-sm text-gray-400 hover:text-yellow-400 transition-colors"
+                                        className="text-left px-4 py-2 text-sm text-black hover:text-yellow-400 transition-colors"
                                       >
                                         {sub}
                                       </button>
@@ -457,7 +457,7 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => goToPage(item.path)}
-                  className="w-full flex items-center gap-3 px-4 py-4 rounded-xl text-white hover:bg-white/5 transition-colors"
+                  className="w-full flex items-center gap-3 px-4 py-4 rounded-xl text-black hover:bg-white/5 transition-colors"
                 >
                   <span className="text-yellow-400">{item.icon}</span>
                   <span className="text-base font-semibold">{item.name}</span>

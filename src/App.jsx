@@ -16,6 +16,7 @@ import JobDetail from "./pages/JobDetail";
 import Blog from "./pages/Blog";
 import SolarCalculator from "./pages/SolarCaculator";
 import NotFound from "./pages/NotFound";
+import Services from "./pages/Services";
 
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -64,6 +65,7 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/certificates" element={<CertificatePage />} />

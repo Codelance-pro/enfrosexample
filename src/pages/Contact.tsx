@@ -143,14 +143,14 @@ const Contact: React.FC = () => {
     {
       id: 1,
       title: 'General Inquiries',
-      contact: 'info@enfros.com',
+      contact: 'sales@enfros.com',
       icon: <Mail className="w-6 h-6" />,
       responseTime: 'Within 24 hours'
     },
     {
       id: 2,
       title: 'Emergency Support',
-      contact: '+91 98765 43210',
+      contact: '+91 9342794586',
       icon: <Phone className="w-6 h-6" />,
       responseTime: '24/7 available'
     },

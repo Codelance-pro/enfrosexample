@@ -3,8 +3,8 @@ import { ArrowRight, Sun, Zap, Phone, Mail, MapPin, Award, Shield, Clock, Chevro
 import { useState, useEffect } from "react";
 import heroImage from "@/assets/hero-solar.jpg";
 import logoImage from "@/assets/logohome.png";
-import solar_landing_match_logo from "@/assets/Imgae.png!sw800.png";
-import solar1 from "../assets/Utility-Scale Solar Power Plants.jpg"
+import solar_landing_match_logo from "@/assets/about-home.png";
+import solar1 from "../assets/utility.jpg"
 import solar2 from "../assets/Agriculture & Farming Solar Solutions.jpg"
 import solar3 from "../assets/Warehouse & Industrial Rooftop Solar.jpg"
 import solar4 from "../assets/Villas & Residential Solar Systems.jpg"
@@ -16,7 +16,7 @@ import solar7 from "../assets/Landscape & Open-Area Solar Projects.jpg";
 import solar10 from "../assets/solar10.jpg";
 import homepage from "../assets/homepage.jpeg";
 import homepage1 from "../assets/homepage1.jpg";
-import homepage2 from "../assets/homepage2.jpg";
+import homepage2 from "../assets/homepage2.png";
 // import clientsGrid from "@/assets/clients-grid.png";
 import client1 from "../assets/client1.jpeg";
 import client2 from "../assets/client2.jpeg";
@@ -611,7 +611,7 @@ const Home = () => {
                 {/* Description */}
                 <div className="text-gray-700 text-base md:text-lg leading-relaxed space-y-3 font-medium">
                   <p>
-                    ENFROS is a renewable energy service provider specializing in solar power solutions. With over 15  years of combined
+                    ENFROS is a renewable energy service provider specializing in solar power solutions. With over 16  years of combined
                     With experience in solar and renewable energy, our directors lead the way.
                   </p>
                   <p>
@@ -675,37 +675,37 @@ const Home = () => {
                 {
                   image: solar1,
                   title: "Utility-Scale Solar Power Plants",
-                  description: "Designing and executing large-scale solar power plants for high efficiency and long-term energy generation.",
+                  description: "Design and execution of large-scale solar power plants for maximum energy efficiency.",
                   icon: Sun
                 },
                 {
                   image: solar2,
-                  title: "Agriculture & Farming Solar Solutions",
-                  description: "Providing solar solutions for irrigation, pumps, and farm operations to reduce energy costs and improve productivity.",
+                  title: "Agriculture Solar Solutions",
+                  description: "Solar-powered systems for irrigation, water pumps, and farming operations.",
                   icon: Zap
                 },
                 {
                   image: solar3,
-                  title: "Warehouse & Industrial Rooftop Solar",
-                  description: "Installing rooftop solar systems for warehouses and industries to optimize power usage and operational savings.",
+                  title: "Industrial Rooftop Solar",
+                  description: "Smart rooftop solar solutions for industries and warehouses to reduce electricity costs.",
                   icon: Battery
                 },
                 {
                   image: solar4,
-                  title: "Villas & Residential Solar Systems",
-                  description: "Delivering reliable and eco-friendly solar power solutions for homes and residential communities.",
+                  title: "Residential Solar Systems",
+                  description: "Reliable solar solutions for homes and villas with sustainable energy benefits.",
                   icon: Lightbulb
                 },
                 {
                   image: solar5,
-                  title: "Manufacturing Unit Solar Installations",
-                  description: "Implementing customized solar installations for manufacturing units to ensure uninterrupted and cost-effective energy.",
+                  title: "Manufacturing Unit Installations",
+                  description: "Customized solar installations for uninterrupted industrial power supply.",
                   icon: Leaf
                 },
                 {
                   image: solar7,
-                  title: "Landscape & Open-Area Solar Projects",
-                  description: "Developing solar projects in open lands and large landscapes to maximize clean energy generation.",
+                  title: "Open Land Solar Projects",
+                  description: "Development of high-performance solar projects in large open areas.",
                   icon: ShieldCheck
                 }
               ].map((item, index) => (
