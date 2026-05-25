@@ -239,9 +239,6 @@ const Navbar = () => {
                               <div className="w-1/2 bg-gray-50/50 p-4 min-h-[300px]">
                                 {hoveredCategory ? (
                                   <div className="animate-in fade-in slide-in-from-left-2 duration-300">
-                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 px-2">
-                                      {hoveredCategory} Sub-products
-                                    </h3>
                                     <div className="grid gap-1">
                                       {productCategories.find(c => c.name === hoveredCategory)?.subheadings.length ? (
                                         productCategories.find(c => c.name === hoveredCategory)?.subheadings.map((sub) => (
