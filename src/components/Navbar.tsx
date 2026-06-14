@@ -92,7 +92,8 @@ const Navbar = () => {
         "Concertina Coil",
         "Tension Wires",
         "Razor Panel",
-        "Wire Mesh"
+        "Wire Mesh",
+        "Precast Boundary Wall"
       ] 
     },
     { 
@@ -119,13 +120,7 @@ const Navbar = () => {
         "Dwc Pipes & Accessories"
       ] 
     },
-    { 
-      name: "Precast Boundary Wall", 
-      icon: <Layout className="w-5 h-5" />, 
-      subheadings: [
-        "Precast Boundary Wall"
-      ] 
-    },
+
     { 
       name: "Fire safety System", 
       icon: <Flame className="w-5 h-5" />, 

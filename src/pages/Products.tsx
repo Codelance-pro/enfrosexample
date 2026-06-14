@@ -175,7 +175,8 @@ const categorySEOData: Record<string, { metaTitle: string, metaDescription: stri
       "Concertina Coil",
       "Tension Wires",
       "Razor Panel",
-      "Wire Mesh"
+      "Wire Mesh",
+      "Precast Boundary Wall"
     ],
     applications: "Solar farms, factories, warehouses, land boundaries"
   },
@@ -220,16 +221,6 @@ const categorySEOData: Record<string, { metaTitle: string, metaDescription: stri
       "Certified Fire-Resistant Doors"
     ],
     applications: "Industrial facilities, commercial buildings, warehouses. Suitable for Control Rooms, Inverter Rooms, Substations, and Electrical Panel Rooms."
-  },
-  'Precast Boundary Wall': {
-    metaTitle: "Precast Boundary Wall | Durable Concrete Boundary Walls",
-    metaDescription: "High-quality precast boundary walls for residential, commercial, and industrial projects. Durable, cost-effective, fast installation, and low maintenance concrete wall solutions.",
-    content: "Precast boundary walls provide strong and secure protection for solar plants and industrial sites. They are highly durable, cost-effective, and quick to install, making them an ideal solution for safeguarding solar panels and valuable equipment from external threats and environmental damage.",
-    products: [
-      "Precast Boundary Walls",
-      "Fencing Solutions"
-    ],
-    applications: "Residential, Commercial, Industrial, Warehouses, Farms, Solar Plants, Construction Sites, and Infrastructure Projects."
   }
 };
 
@@ -307,7 +298,7 @@ const Products: React.FC = () => {
       description: 'Security and perimeter protection',
       icon: <Shield className="w-8 h-8" />,
       color: 'from-slate-500 to-slate-700',
-      count: 12
+      count: 13
     },
     {
       id: 3,
@@ -333,14 +324,7 @@ const Products: React.FC = () => {
       color: 'from-gray-600 to-gray-700',
       count: 0
     },
-    {
-      id: 6,
-      name: 'Precast Boundary Wall',
-      description: 'Prefabricated boundary walls',
-      icon: <Grid className="w-8 h-8" />,
-      color: 'from-red-500 to-pink-500',
-      count: 0
-    },
+
     {
       id: 7,
       name: 'Fire safety System',
@@ -1218,7 +1202,7 @@ const Products: React.FC = () => {
     {
       id: 38,
       name: 'Precast Boundary Wall',
-      category: 'Precast Boundary Wall',
+      category: 'Fencing & Boundary Solutions',
       description: 'Precast Boundary Wall is a durable and cost-effective concrete fencing solution made with precast panels and pillars. It provides strong perimeter protection and quick installation compared to traditional brick walls.',
       features: [
         'Durable Concrete',
