@@ -577,7 +577,7 @@ const Contact: React.FC = () => {
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4 shadow-lg">
                   <Globe className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Global Offices</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Register Office</h2>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 {offices.map((office) => (

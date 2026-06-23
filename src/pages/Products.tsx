@@ -58,11 +58,11 @@ import fenceGuard from '../assets/fencingImages/5019340_PG1.jpg';
 // Import Cable Tray Images
 import giCableTray from '../assets/cableTray/GI Cable Tray (Hot Dip Galvanized) - 1.jpg';
 import perforatedCableTray from '../assets/cableTray/Perforated Cable Tray - 1.jpg';
-import cableTraySupport from '../assets/cableTray/Cable Tray Support Structures.jpg';
+import ladderCableTray from '../assets/cableTray/ladder_cable_tray.png';
 
 // Import Street Light Images
 import acStreetLight from '../assets/streetLights/AC Street Lights - 2.jpg';
-import solarStreetLight from '../assets/streetLights/Solar Street Lights  - 3.jpg';
+import lightPole from '../assets/streetLights/light_pole.png';
 
 // Import DWC Pipe Images
 import dwcPipeImage from '../assets/dwc/Astral_Telerex-v1.png.webp';
@@ -181,25 +181,25 @@ const categorySEOData: Record<string, { metaTitle: string, metaDescription: stri
     applications: "Solar farms, factories, warehouses, land boundaries"
   },
   'Cable management system': {
-    metaTitle: "Cable Tray Manufacturer in India | GI & Perforated Cable Systems",
-    metaDescription: "Trusted cable tray manufacturer in India offering GI hot dip galvanized trays, perforated trays, and support structures for industrial cable management.",
+    metaTitle: "Cable Tray Manufacturer in India | GI, Perforated & Ladder Cable Systems",
+    metaDescription: "Trusted cable tray manufacturer in India offering GI hot dip galvanized trays, perforated trays, and ladder type trays for industrial cable management.",
     content: "Ensure organized and safe cable routing with our durable cable management systems designed for easy installation and long-term performance.",
     products: [
       "GI Cable Tray (Hot Dip Galvanized)",
       "Perforated Cable Tray",
-      "Cable Tray Support Structures"
+      "Ladder Type Cable Tray"
     ],
-    applications: "Industrial plants, commercial buildings, power infrastructure"
+    applications: "Industrial plants, commercial buildings, power infrastructure, data centers, telecom, and solar power projects"
   },
   'Street Lights & Lighting Solution': {
-    metaTitle: "Solar & LED Street Light Solutions in India | Outdoor Lighting Supplier",
-    metaDescription: "Energy-efficient solar and AC street lighting solutions in India for roads, highways, and industrial areas with long-lasting performance.",
-    content: "We provide energy-efficient and high-performance lighting solutions for outdoor and industrial environments.",
+    metaTitle: "Solar, LED Street Lights & Light Poles in India | Outdoor Lighting Supplier",
+    metaDescription: "Energy-efficient solar, AC street lighting solutions, and heavy-duty galvanized light poles in India for roads, highways, and industrial areas.",
+    content: "We provide energy-efficient and high-performance lighting solutions, along with robust steel light poles for outdoor and industrial environments.",
     products: [
-      "Solar Street Light",
+      "Light Pole",
       "AC Street Light"
     ],
-    applications: "Roads, highways, campuses, industrial areas"
+    applications: "Roads, highways, campuses, industrial areas, commercial complexes"
   },
   'Dwc Pipes & Its accessories': {
     metaTitle: "DWC Pipe Manufacturer in India | Double Wall Corrugated Pipes Supplier",
@@ -306,7 +306,7 @@ const Products: React.FC = () => {
       description: 'Organized cable routing',
       icon: <Cable className="w-8 h-8" />,
       color: 'from-blue-500 to-purple-500',
-      count: 1
+      count: 3
     },
     {
       id: 4,
@@ -1057,51 +1057,55 @@ const Products: React.FC = () => {
     },
     {
       id: 32,
-      name: 'Cable Tray Support Structures',
+      name: 'Ladder Type Cable Tray',
       category: 'Cable management system',
-      description: 'Cable Tray Support Structures provide stable and secure mounting for cable trays, ensuring organized and safe cable management in all types of installations.',
+      description: 'Designed for heavy-duty applications, Ladder Type Cable Trays provide excellent strength, durability, and ease of cable installation, making them ideal for long cable runs and high-load environments.',
       features: [
-        'Stable Mounting',
-        'Secure Fixing',
-        'Adjustable Height',
-        'Versatile Design'
+        'High load-bearing capacity',
+        'Open structure for superior ventilation',
+        'Easy cable laying and maintenance',
+        'Corrosion-resistant construction',
+        'Suitable for indoor and outdoor installations',
+        'Long service life with minimal maintenance'
       ],
       specifications: [
-        { key: 'Material', value: 'Mild Steel/GI' },
-        { key: 'Stability', value: 'High' },
-        { key: 'Mounting Type', value: 'Wall/Ceiling/Floor' },
-        { key: 'Load Bearing', value: 'Heavy Duty' }
+        { key: 'Material', value: 'MS, PG, HDG, SS, Aluminum' },
+        { key: 'Width', value: '50 mm to 1200 mm' },
+        { key: 'Side Rail Height', value: '25 mm to 150 mm' },
+        { key: 'Thickness', value: '1.2 mm to 3.0 mm' }
       ],
-      price: 25.00,
-      rating: 4.7,
-      reviews: 32,
-      imageUrl: cableTraySupport,
-      isFeatured: false,
-      tags: ['Mounting', 'Structure', 'Secure']
+      price: 55.00,
+      rating: 4.8,
+      reviews: 26,
+      imageUrl: ladderCableTray,
+      isFeatured: true,
+      tags: ['Heavy Duty', 'Ventilation', 'Galvanized']
     },
     {
       id: 33,
-      name: 'Solar Street Lights',
+      name: 'Light Pole',
       category: 'Street Lights & Lighting Solution',
-      description: 'Solar Street Lights are energy-efficient lighting solutions powered by solar energy, ideal for outdoor and off-grid lighting applications.',
+      description: 'Light Poles are engineered to provide stable and reliable support for outdoor lighting systems, manufactured from high-quality steel for exceptional strength, durability, and corrosion resistance.',
       features: [
-        'Energy Efficient',
-        'Solar Powered',
-        'Off-grid Ready',
-        'Durable Construction'
+        'High-strength steel construction',
+        'Excellent corrosion resistance',
+        'Weather-resistant and durable design',
+        'Low maintenance requirements',
+        'Easy installation and replacement',
+        'Available in customized heights and specifications'
       ],
       specifications: [
-        { key: 'Power Source', value: 'Solar' },
-        { key: 'Type', value: 'Outdoor LED' },
-        { key: 'Application', value: 'Streets/Highways' },
-        { key: 'Efficiency', value: 'High' }
+        { key: 'Material', value: 'MS / Galvanized Steel' },
+        { key: 'Height', value: '3 m to 20 m' },
+        { key: 'Pole Type', value: 'Octagonal, Polygonal, Conical, Tubular' },
+        { key: 'Surface Finish', value: 'HDG / Powder Coated' }
       ],
       price: 120.00,
       rating: 4.8,
       reviews: 45,
-      imageUrl: solarStreetLight,
+      imageUrl: lightPole,
       isFeatured: true,
-      tags: ['Solar', 'Outdoor', 'Efficient']
+      tags: ['Durable', 'Galvanized', 'Street Lighting']
     },
     {
       id: 34,

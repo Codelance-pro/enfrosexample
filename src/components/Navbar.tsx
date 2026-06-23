@@ -102,14 +102,14 @@ const Navbar = () => {
       subheadings: [
         "Gi cable tray (Hot dip galvanized)",
         "Perforated cable tray",
-        "Cable tray support structures"
+        "Ladder type cable tray"
       ] 
     },
     { 
       name: "Street Lights & Lighting Solution", 
       icon: <Lightbulb className="w-5 h-5" />, 
       subheadings: [
-        "Solar Street Lights",
+        "Light Pole",
         "Ac Street Lights"
       ] 
     },
