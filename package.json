@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://codelance-pro.github.io/solar-bloom-spark",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
